@@ -1,0 +1,68 @@
+{
+  // go
+  "[go]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+  },
+  "go.buildOnSave": "off",
+  //
+  // for host, goenv
+  "go.goroot": "~/.goenv/versions/1.17.5",
+  "go.gopath": "~/go/1.17.5",
+  //
+  // tool
+  "go.toolsManagement.autoUpdate": false,
+  //
+  // format
+  "go.formatTool": "gofmt",
+  //
+  // lint
+  "go.autocompleteUnimportedPackages": true,
+  "go.lintTool": "golangci-lint",
+  "go.lintOnSave": "package",
+  //
+  // langage server
+  "go.useLanguageServer": true,
+  "go.alternateTools": {
+    "go-langserver": "gopls"
+  },
+  "go.languageServerExperimentalFeatures": {
+    "diagnostics": true
+  },
+  // "go.languageServerFlags": [
+  //   "-rpc.trace", // for more detailed debug logging
+  //   "serve",
+  //   "--debug=localhost:6060", // to investigate memory usage, see profiles
+  // ],
+  // Global settings for gopls
+  // https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+  "gopls": {
+    // === Officially supported Settings ===
+    // This controls the information that appears in the hover text.
+    "hoverKind": "SynopsisDocumentation",
+    // If true, then completion responses may contain placeholders for function parameters or struct fields.
+    "usePlaceholders": true,
+    // This controls where points documentation for given package in `textDocument/documentLink`.
+    "linkTarget": "pkg.go.dev",
+    // === Experimental Settings ===
+    // If true, it enables the use of the staticcheck.io analyzers.
+    // Warning: This will significantly increase memory usage.
+    "staticcheck": false,
+    // If false, indicates that the user does not want documentation with completion results.
+    "completionDocumentation": true,
+    // If true, the completion engine is allowed to make suggestions for packages that you do not currently import.
+    "completeUnimported": true,
+    // If true, this turns on the ability to return completions from deep inside relevant entities, rather than just the locally accessible ones.
+    "deepCompletion": true
+  },
+  //
+  // openapi/swagger
+  "swaggerViewer.previewInBrowser": true,
+  // other
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs":"active"
+}
