@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: ./build/api/local.Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      ENV: LOCAL
+      REST_PORT: 8080
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_DATABASE: database
+    env_file:
+      - ../.env
+    volumes:
+      - ./:/go/src/app
+    networks:
+      - infrastructure
+
+networks:
+  infrastructure:
+    external: true

@@ -1,0 +1,278 @@
+openapi: 3.0.0
+info:
+  title: sample api
+  version: "1.0"
+  description: ""
+servers:
+  - url: "http://localhost:8080/api/v1"
+tags:
+  - name: self
+    description: リクエストを発行したユーザーに関する操作を行うもの
+  - name: user
+paths:
+  /profile:
+    get:
+      summary: プロフィール取得
+      description: プロフィール取得。
+      tags:
+        - self
+      operationId: get-profile
+      security:
+        - Bearer: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+    put:
+      summary: プロフィール編集
+      description: プロフィール編集
+      tags:
+        - self
+      operationId: put-profile
+      security:
+        - Bearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        "204":
+          description: No Content
+
+  /users:
+    post:
+      summary: ユーザーの作成
+      description: ユーザーの作成。
+      tags:
+        - user
+      operationId: post-user
+      security:
+        - Bearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+                - name
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /teams:
+    get:
+      summary: チーム一覧の取得
+      tags:
+        - self
+        - team
+      operationId: get-teams
+      security:
+        - Bearer: []
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: ページ数
+          required: true
+        - schema:
+            type: integer
+          in: query
+          name: limit
+          description: 1ページあたりの上限数
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: name
+          description: 名前で検索
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Team"
+
+    post:
+      summary: チームの作成
+      description: チームの作成
+      tags:
+        - team
+      operationId: post-teams
+      security:
+        - Bearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+              required:
+                - name
+                - description
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+
+  "/teams/{teamId}":
+    parameters:
+      - schema:
+          type: string
+        name: teamId
+        in: path
+        required: true
+
+    put:
+      summary: チームの編集
+      description: チームの編集
+      tags:
+        - team
+      operationId: put-teams-teamId
+      security:
+        - Bearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "204":
+          description: No Content
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    delete:
+      summary: チームの削除
+      description: チームの削除。チームオーナー以外からのリクエストの場合はエラーを返す。
+      tags:
+        - team
+      operationId: delete-teams-teamId
+      security:
+        - Bearer: []
+      responses:
+        "204":
+          description: No Content
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  "/teams/{teamId}/join":
+    parameters:
+      - schema:
+          type: string
+        name: teamId
+        in: path
+        required: true
+
+    post:
+      summary: チームへの参加
+      description: チームへの参加を行う。すでに参加済みの場合はエラーを返す。
+      operationId: post-teams-teamId-join
+      security:
+        - Bearer: []
+      responses:
+        "204":
+          description: No Content
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: string
+          example: UNKNOWN_ERROR
+        message:
+          type: string
+          example: An unknown error has occurred.
+      required:
+        - code
+        - message
+
+    User:
+      title: User
+      type: object
+      description: User Entity
+      properties:
+        id:
+          type: string
+          example: user_id
+        name:
+          type: string
+          example: user name
+      required:
+        - id
+        - name
+
+    Team:
+      title: Team
+      type: object
+      properties:
+        id:
+          type: string
+          example: team_id
+        name:
+          type: string
+          example: team name
+        description:
+          type: string
+          example: team description
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
+      required:
+        - id
+        - name
+        - description
+        - users
+
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer

@@ -1,0 +1,16 @@
+{
+	"recommendations": [
+		"golang.go",
+		"redhat.vscode-yaml",
+		"42crunch.vscode-openapi",
+		"arjun.swagger-viewer",
+		"vscode-icons-team.vscode-icons",
+		"ms-azuretools.vscode-docker",
+		"donjayamanne.githistory",
+		"eamodio.gitlens",
+		"sirtori.indenticator",
+		"ionutvmi.path-autocomplete",
+		"gruntfuggly.todo-tree",
+		"bungcip.better-toml",
+	]
+}
