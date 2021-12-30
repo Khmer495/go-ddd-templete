@@ -130,7 +130,7 @@ func (th teamHandler) PostTeamsTeamIdJoin(ctx echo.Context, teamId string) error
 	if err != nil {
 		zap.S().Errorf("th.tu.Join: %+v", err)
 		if cerror.IsCode(err, cerror.AlreadyExistsErrorCode) {
-			return NewAlreadyAppliedError(ctx)
+			return NewAlreadyJoinedError(ctx)
 		}
 		if cerror.IsCode(err, cerror.UnauthorizedErrorCode) {
 			return NewNotFoundError(ctx)

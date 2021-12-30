@@ -5,7 +5,7 @@ import (
 
 	"github.com/Khmer495/go-templete/internal/app/batch/hoge/handler"
 	"github.com/Khmer495/go-templete/internal/app/batch/hoge/util/di"
-	"github.com/Khmer495/go-templete/internal/pkg/domain/repository"
+	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/entmysql"
 	"github.com/Khmer495/go-templete/internal/pkg/util/logger"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -27,11 +27,11 @@ func lambdaHandler(ctx context.Context, event events.CloudWatchEvent) {
 
 func init() {
 	logger.NewLogger()
-	repository.NewMysqlClient()
+	entmysql.NewMysqlClient()
 }
 
 func main() {
 	zap.L().Info("Initialize.")
 	lambda.Start(lambdaHandler)
-	defer repository.MysqlClient.Close()
+	defer entmysql.MysqlClient.Close()
 }

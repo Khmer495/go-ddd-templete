@@ -4,9 +4,9 @@ import (
 	"github.com/Khmer495/go-templete/internal/app/api/v1/handler"
 	"github.com/Khmer495/go-templete/internal/app/api/v1/infrastructure/echo"
 	"github.com/Khmer495/go-templete/internal/pkg/config"
-	"github.com/Khmer495/go-templete/internal/pkg/domain/repository"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/service"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/usecase"
+	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/entmysql"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/firebase"
 	"github.com/Khmer495/go-templete/internal/pkg/util"
 	"go.uber.org/dig"
@@ -39,13 +39,13 @@ func provideService(d *dig.Container) {
 }
 
 func provideRepository(d *dig.Container) {
-	if err := d.Provide(repository.NewAuthRepository); err != nil {
+	if err := d.Provide(entmysql.NewAuthRepository); err != nil {
 		newPanic(err)
 	}
-	if err := d.Provide(repository.NewUserRepository); err != nil {
+	if err := d.Provide(entmysql.NewUserRepository); err != nil {
 		newPanic(err)
 	}
-	if err := d.Provide(repository.NewTeamRepository); err != nil {
+	if err := d.Provide(entmysql.NewTeamRepository); err != nil {
 		newPanic(err)
 	}
 }

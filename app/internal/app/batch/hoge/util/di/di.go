@@ -1,8 +1,8 @@
 package di
 
 import (
-	"github.com/Khmer495/go-templete/internal/pkg/domain/repository"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/service"
+	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/entmysql"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/firebase"
 	"go.uber.org/dig"
 	"go.uber.org/zap"
@@ -22,7 +22,7 @@ func provideService(d *dig.Container) {
 }
 
 func provideRepository(d *dig.Container) {
-	if err := d.Provide(repository.NewTeamRepository); err != nil {
+	if err := d.Provide(entmysql.NewTeamRepository); err != nil {
 		newPanic(err)
 	}
 }

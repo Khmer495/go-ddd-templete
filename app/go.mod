@@ -6,10 +6,6 @@ require (
 	entgo.io/ent v0.8.0
 	firebase.google.com/go/v4 v4.5.0
 	github.com/aws/aws-lambda-go v1.24.0
-	github.com/aws/aws-sdk-go-v2 v1.7.0
-	github.com/aws/aws-sdk-go-v2/config v1.4.1
-	github.com/aws/aws-sdk-go-v2/credentials v1.3.0
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.11.0
 	github.com/deepmap/oapi-codegen v1.9.0
 	github.com/getkin/kin-openapi v0.80.0
 	github.com/go-sql-driver/mysql v1.5.1-0.20200311113236-681ffa848bae
@@ -26,14 +22,6 @@ require (
 	cloud.google.com/go v0.75.0 // indirect
 	cloud.google.com/go/firestore v1.5.0 // indirect
 	cloud.google.com/go/storage v1.10.0 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.2.0 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/ini v1.1.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.2.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.2.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.5.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.3.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sts v1.5.0 // indirect
-	github.com/aws/smithy-go v1.5.0 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
@@ -48,7 +36,6 @@ require (
 	github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e // indirect
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.1 // indirect
 	go.opencensus.io v0.23.0 // indirect

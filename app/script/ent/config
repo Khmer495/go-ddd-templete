@@ -1,1 +1,1 @@
-ENT_SRC_PATH=./internal/pkg/ent
+ENT_SRC_PATH=./internal/pkg/infrastracture/ent
