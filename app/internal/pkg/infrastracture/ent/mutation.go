@@ -52,7 +52,7 @@ var _ ent.Mutation = (*AuthMutation)(nil)
 // authOption allows management of the mutation configuration using functional options.
 type authOption func(*AuthMutation)
 
-// newAuthMutation creates new mutation for the Auth entity.
+// newAuthMutation creates new mutation for the Auth model.
 func newAuthMutation(c config, op Op, opts ...authOption) *AuthMutation {
 	m := &AuthMutation{
 		config:        c,
@@ -140,7 +140,7 @@ func (m *AuthMutation) UserID() (r int, exists bool) {
 	return *v, true
 }
 
-// OldUserID returns the old "user_id" field's value of the Auth entity.
+// OldUserID returns the old "user_id" field's value of the Auth model.
 // If the Auth object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *AuthMutation) OldUserID(ctx context.Context) (v int, err error) {
@@ -176,7 +176,7 @@ func (m *AuthMutation) FirebaseUserID() (r string, exists bool) {
 	return *v, true
 }
 
-// OldFirebaseUserID returns the old "firebase_user_id" field's value of the Auth entity.
+// OldFirebaseUserID returns the old "firebase_user_id" field's value of the Auth model.
 // If the Auth object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *AuthMutation) OldFirebaseUserID(ctx context.Context) (v string, err error) {
@@ -198,12 +198,12 @@ func (m *AuthMutation) ResetFirebaseUserID() {
 	m.firebase_user_id = nil
 }
 
-// ClearUser clears the "user" edge to the User entity.
+// ClearUser clears the "user" edge to the User model.
 func (m *AuthMutation) ClearUser() {
 	m.cleareduser = true
 }
 
-// UserCleared reports if the "user" edge to the User entity was cleared.
+// UserCleared reports if the "user" edge to the User model was cleared.
 func (m *AuthMutation) UserCleared() bool {
 	return m.cleareduser
 }
@@ -459,7 +459,7 @@ var _ ent.Mutation = (*TeamMutation)(nil)
 // teamOption allows management of the mutation configuration using functional options.
 type teamOption func(*TeamMutation)
 
-// newTeamMutation creates new mutation for the Team entity.
+// newTeamMutation creates new mutation for the Team model.
 func newTeamMutation(c config, op Op, opts ...teamOption) *TeamMutation {
 	m := &TeamMutation{
 		config:        c,
@@ -547,7 +547,7 @@ func (m *TeamMutation) Ulid() (r string, exists bool) {
 	return *v, true
 }
 
-// OldUlid returns the old "ulid" field's value of the Team entity.
+// OldUlid returns the old "ulid" field's value of the Team model.
 // If the Team object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamMutation) OldUlid(ctx context.Context) (v string, err error) {
@@ -583,7 +583,7 @@ func (m *TeamMutation) CreatedAt() (r time.Time, exists bool) {
 	return *v, true
 }
 
-// OldCreatedAt returns the old "created_at" field's value of the Team entity.
+// OldCreatedAt returns the old "created_at" field's value of the Team model.
 // If the Team object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamMutation) OldCreatedAt(ctx context.Context) (v time.Time, err error) {
@@ -619,7 +619,7 @@ func (m *TeamMutation) UpdatedAt() (r time.Time, exists bool) {
 	return *v, true
 }
 
-// OldUpdatedAt returns the old "updated_at" field's value of the Team entity.
+// OldUpdatedAt returns the old "updated_at" field's value of the Team model.
 // If the Team object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamMutation) OldUpdatedAt(ctx context.Context) (v time.Time, err error) {
@@ -655,7 +655,7 @@ func (m *TeamMutation) DeletedAt() (r time.Time, exists bool) {
 	return *v, true
 }
 
-// OldDeletedAt returns the old "deleted_at" field's value of the Team entity.
+// OldDeletedAt returns the old "deleted_at" field's value of the Team model.
 // If the Team object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamMutation) OldDeletedAt(ctx context.Context) (v *time.Time, err error) {
@@ -704,7 +704,7 @@ func (m *TeamMutation) CreateUserID() (r int, exists bool) {
 	return *v, true
 }
 
-// OldCreateUserID returns the old "create_user_id" field's value of the Team entity.
+// OldCreateUserID returns the old "create_user_id" field's value of the Team model.
 // If the Team object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamMutation) OldCreateUserID(ctx context.Context) (v int, err error) {
@@ -740,7 +740,7 @@ func (m *TeamMutation) Name() (r string, exists bool) {
 	return *v, true
 }
 
-// OldName returns the old "name" field's value of the Team entity.
+// OldName returns the old "name" field's value of the Team model.
 // If the Team object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamMutation) OldName(ctx context.Context) (v string, err error) {
@@ -776,7 +776,7 @@ func (m *TeamMutation) Description() (r string, exists bool) {
 	return *v, true
 }
 
-// OldDescription returns the old "description" field's value of the Team entity.
+// OldDescription returns the old "description" field's value of the Team model.
 // If the Team object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamMutation) OldDescription(ctx context.Context) (v string, err error) {
@@ -798,12 +798,12 @@ func (m *TeamMutation) ResetDescription() {
 	m.description = nil
 }
 
-// ClearCreateUser clears the "create_user" edge to the User entity.
+// ClearCreateUser clears the "create_user" edge to the User model.
 func (m *TeamMutation) ClearCreateUser() {
 	m.clearedcreate_user = true
 }
 
-// CreateUserCleared reports if the "create_user" edge to the User entity was cleared.
+// CreateUserCleared reports if the "create_user" edge to the User model was cleared.
 func (m *TeamMutation) CreateUserCleared() bool {
 	return m.clearedcreate_user
 }
@@ -824,7 +824,7 @@ func (m *TeamMutation) ResetCreateUser() {
 	m.clearedcreate_user = false
 }
 
-// AddTeamUserIDs adds the "team_users" edge to the TeamUser entity by ids.
+// AddTeamUserIDs adds the "team_users" edge to the TeamUser model by ids.
 func (m *TeamMutation) AddTeamUserIDs(ids ...int) {
 	if m.team_users == nil {
 		m.team_users = make(map[int]struct{})
@@ -834,17 +834,17 @@ func (m *TeamMutation) AddTeamUserIDs(ids ...int) {
 	}
 }
 
-// ClearTeamUsers clears the "team_users" edge to the TeamUser entity.
+// ClearTeamUsers clears the "team_users" edge to the TeamUser model.
 func (m *TeamMutation) ClearTeamUsers() {
 	m.clearedteam_users = true
 }
 
-// TeamUsersCleared reports if the "team_users" edge to the TeamUser entity was cleared.
+// TeamUsersCleared reports if the "team_users" edge to the TeamUser model was cleared.
 func (m *TeamMutation) TeamUsersCleared() bool {
 	return m.clearedteam_users
 }
 
-// RemoveTeamUserIDs removes the "team_users" edge to the TeamUser entity by IDs.
+// RemoveTeamUserIDs removes the "team_users" edge to the TeamUser model by IDs.
 func (m *TeamMutation) RemoveTeamUserIDs(ids ...int) {
 	if m.removedteam_users == nil {
 		m.removedteam_users = make(map[int]struct{})
@@ -854,7 +854,7 @@ func (m *TeamMutation) RemoveTeamUserIDs(ids ...int) {
 	}
 }
 
-// RemovedTeamUsers returns the removed IDs of the "team_users" edge to the TeamUser entity.
+// RemovedTeamUsers returns the removed IDs of the "team_users" edge to the TeamUser model.
 func (m *TeamMutation) RemovedTeamUsersIDs() (ids []int) {
 	for id := range m.removedteam_users {
 		ids = append(ids, id)
@@ -1227,7 +1227,7 @@ var _ ent.Mutation = (*TeamUserMutation)(nil)
 // teamuserOption allows management of the mutation configuration using functional options.
 type teamuserOption func(*TeamUserMutation)
 
-// newTeamUserMutation creates new mutation for the TeamUser entity.
+// newTeamUserMutation creates new mutation for the TeamUser model.
 func newTeamUserMutation(c config, op Op, opts ...teamuserOption) *TeamUserMutation {
 	m := &TeamUserMutation{
 		config:        c,
@@ -1315,7 +1315,7 @@ func (m *TeamUserMutation) CreatedAt() (r time.Time, exists bool) {
 	return *v, true
 }
 
-// OldCreatedAt returns the old "created_at" field's value of the TeamUser entity.
+// OldCreatedAt returns the old "created_at" field's value of the TeamUser model.
 // If the TeamUser object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamUserMutation) OldCreatedAt(ctx context.Context) (v time.Time, err error) {
@@ -1351,7 +1351,7 @@ func (m *TeamUserMutation) DeletedAt() (r time.Time, exists bool) {
 	return *v, true
 }
 
-// OldDeletedAt returns the old "deleted_at" field's value of the TeamUser entity.
+// OldDeletedAt returns the old "deleted_at" field's value of the TeamUser model.
 // If the TeamUser object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamUserMutation) OldDeletedAt(ctx context.Context) (v *time.Time, err error) {
@@ -1400,7 +1400,7 @@ func (m *TeamUserMutation) TeamID() (r int, exists bool) {
 	return *v, true
 }
 
-// OldTeamID returns the old "team_id" field's value of the TeamUser entity.
+// OldTeamID returns the old "team_id" field's value of the TeamUser model.
 // If the TeamUser object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamUserMutation) OldTeamID(ctx context.Context) (v int, err error) {
@@ -1436,7 +1436,7 @@ func (m *TeamUserMutation) UserID() (r int, exists bool) {
 	return *v, true
 }
 
-// OldUserID returns the old "user_id" field's value of the TeamUser entity.
+// OldUserID returns the old "user_id" field's value of the TeamUser model.
 // If the TeamUser object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *TeamUserMutation) OldUserID(ctx context.Context) (v int, err error) {
@@ -1458,12 +1458,12 @@ func (m *TeamUserMutation) ResetUserID() {
 	m.user = nil
 }
 
-// ClearTeam clears the "team" edge to the Team entity.
+// ClearTeam clears the "team" edge to the Team model.
 func (m *TeamUserMutation) ClearTeam() {
 	m.clearedteam = true
 }
 
-// TeamCleared reports if the "team" edge to the Team entity was cleared.
+// TeamCleared reports if the "team" edge to the Team model was cleared.
 func (m *TeamUserMutation) TeamCleared() bool {
 	return m.clearedteam
 }
@@ -1484,12 +1484,12 @@ func (m *TeamUserMutation) ResetTeam() {
 	m.clearedteam = false
 }
 
-// ClearUser clears the "user" edge to the User entity.
+// ClearUser clears the "user" edge to the User model.
 func (m *TeamUserMutation) ClearUser() {
 	m.cleareduser = true
 }
 
-// UserCleared reports if the "user" edge to the User entity was cleared.
+// UserCleared reports if the "user" edge to the User model was cleared.
 func (m *TeamUserMutation) UserCleared() bool {
 	return m.cleareduser
 }
@@ -1806,7 +1806,7 @@ var _ ent.Mutation = (*UserMutation)(nil)
 // userOption allows management of the mutation configuration using functional options.
 type userOption func(*UserMutation)
 
-// newUserMutation creates new mutation for the User entity.
+// newUserMutation creates new mutation for the User model.
 func newUserMutation(c config, op Op, opts ...userOption) *UserMutation {
 	m := &UserMutation{
 		config:        c,
@@ -1894,7 +1894,7 @@ func (m *UserMutation) Ulid() (r string, exists bool) {
 	return *v, true
 }
 
-// OldUlid returns the old "ulid" field's value of the User entity.
+// OldUlid returns the old "ulid" field's value of the User model.
 // If the User object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *UserMutation) OldUlid(ctx context.Context) (v string, err error) {
@@ -1930,7 +1930,7 @@ func (m *UserMutation) CreatedAt() (r time.Time, exists bool) {
 	return *v, true
 }
 
-// OldCreatedAt returns the old "created_at" field's value of the User entity.
+// OldCreatedAt returns the old "created_at" field's value of the User model.
 // If the User object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *UserMutation) OldCreatedAt(ctx context.Context) (v time.Time, err error) {
@@ -1966,7 +1966,7 @@ func (m *UserMutation) UpdatedAt() (r time.Time, exists bool) {
 	return *v, true
 }
 
-// OldUpdatedAt returns the old "updated_at" field's value of the User entity.
+// OldUpdatedAt returns the old "updated_at" field's value of the User model.
 // If the User object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *UserMutation) OldUpdatedAt(ctx context.Context) (v time.Time, err error) {
@@ -2002,7 +2002,7 @@ func (m *UserMutation) DeletedAt() (r time.Time, exists bool) {
 	return *v, true
 }
 
-// OldDeletedAt returns the old "deleted_at" field's value of the User entity.
+// OldDeletedAt returns the old "deleted_at" field's value of the User model.
 // If the User object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *UserMutation) OldDeletedAt(ctx context.Context) (v *time.Time, err error) {
@@ -2051,7 +2051,7 @@ func (m *UserMutation) Name() (r string, exists bool) {
 	return *v, true
 }
 
-// OldName returns the old "name" field's value of the User entity.
+// OldName returns the old "name" field's value of the User model.
 // If the User object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
 func (m *UserMutation) OldName(ctx context.Context) (v string, err error) {
@@ -2073,7 +2073,7 @@ func (m *UserMutation) ResetName() {
 	m.name = nil
 }
 
-// AddTeamIDs adds the "teams" edge to the Team entity by ids.
+// AddTeamIDs adds the "teams" edge to the Team model by ids.
 func (m *UserMutation) AddTeamIDs(ids ...int) {
 	if m.teams == nil {
 		m.teams = make(map[int]struct{})
@@ -2083,17 +2083,17 @@ func (m *UserMutation) AddTeamIDs(ids ...int) {
 	}
 }
 
-// ClearTeams clears the "teams" edge to the Team entity.
+// ClearTeams clears the "teams" edge to the Team model.
 func (m *UserMutation) ClearTeams() {
 	m.clearedteams = true
 }
 
-// TeamsCleared reports if the "teams" edge to the Team entity was cleared.
+// TeamsCleared reports if the "teams" edge to the Team model was cleared.
 func (m *UserMutation) TeamsCleared() bool {
 	return m.clearedteams
 }
 
-// RemoveTeamIDs removes the "teams" edge to the Team entity by IDs.
+// RemoveTeamIDs removes the "teams" edge to the Team model by IDs.
 func (m *UserMutation) RemoveTeamIDs(ids ...int) {
 	if m.removedteams == nil {
 		m.removedteams = make(map[int]struct{})
@@ -2103,7 +2103,7 @@ func (m *UserMutation) RemoveTeamIDs(ids ...int) {
 	}
 }
 
-// RemovedTeams returns the removed IDs of the "teams" edge to the Team entity.
+// RemovedTeams returns the removed IDs of the "teams" edge to the Team model.
 func (m *UserMutation) RemovedTeamsIDs() (ids []int) {
 	for id := range m.removedteams {
 		ids = append(ids, id)
@@ -2126,7 +2126,7 @@ func (m *UserMutation) ResetTeams() {
 	m.removedteams = nil
 }
 
-// AddTeamUserIDs adds the "team_users" edge to the TeamUser entity by ids.
+// AddTeamUserIDs adds the "team_users" edge to the TeamUser model by ids.
 func (m *UserMutation) AddTeamUserIDs(ids ...int) {
 	if m.team_users == nil {
 		m.team_users = make(map[int]struct{})
@@ -2136,17 +2136,17 @@ func (m *UserMutation) AddTeamUserIDs(ids ...int) {
 	}
 }
 
-// ClearTeamUsers clears the "team_users" edge to the TeamUser entity.
+// ClearTeamUsers clears the "team_users" edge to the TeamUser model.
 func (m *UserMutation) ClearTeamUsers() {
 	m.clearedteam_users = true
 }
 
-// TeamUsersCleared reports if the "team_users" edge to the TeamUser entity was cleared.
+// TeamUsersCleared reports if the "team_users" edge to the TeamUser model was cleared.
 func (m *UserMutation) TeamUsersCleared() bool {
 	return m.clearedteam_users
 }
 
-// RemoveTeamUserIDs removes the "team_users" edge to the TeamUser entity by IDs.
+// RemoveTeamUserIDs removes the "team_users" edge to the TeamUser model by IDs.
 func (m *UserMutation) RemoveTeamUserIDs(ids ...int) {
 	if m.removedteam_users == nil {
 		m.removedteam_users = make(map[int]struct{})
@@ -2156,7 +2156,7 @@ func (m *UserMutation) RemoveTeamUserIDs(ids ...int) {
 	}
 }
 
-// RemovedTeamUsers returns the removed IDs of the "team_users" edge to the TeamUser entity.
+// RemovedTeamUsers returns the removed IDs of the "team_users" edge to the TeamUser model.
 func (m *UserMutation) RemovedTeamUsersIDs() (ids []int) {
 	for id := range m.removedteam_users {
 		ids = append(ids, id)

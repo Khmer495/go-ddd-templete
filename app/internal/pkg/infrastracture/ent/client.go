@@ -134,7 +134,7 @@ func (c *Client) Close() error {
 	return c.driver.Close()
 }
 
-// Use adds the mutation hooks to all the entity clients.
+// Use adds the mutation hooks to all the model clients.
 // In order to add hooks to a specific client, call: `client.Node.Use(...)`.
 func (c *Client) Use(hooks ...Hook) {
 	c.Auth.Use(hooks...)
@@ -176,7 +176,7 @@ func (c *AuthClient) Update() *AuthUpdate {
 	return &AuthUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
-// UpdateOne returns an update builder for the given entity.
+// UpdateOne returns an update builder for the given model.
 func (c *AuthClient) UpdateOne(a *Auth) *AuthUpdateOne {
 	mutation := newAuthMutation(c.config, OpUpdateOne, withAuth(a))
 	return &AuthUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
@@ -194,7 +194,7 @@ func (c *AuthClient) Delete() *AuthDelete {
 	return &AuthDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
-// DeleteOne returns a delete builder for the given entity.
+// DeleteOne returns a delete builder for the given model.
 func (c *AuthClient) DeleteOne(a *Auth) *AuthDeleteOne {
 	return c.DeleteOneID(a.ID)
 }
@@ -214,7 +214,7 @@ func (c *AuthClient) Query() *AuthQuery {
 	}
 }
 
-// Get returns a Auth entity by its id.
+// Get returns a Auth model by its id.
 func (c *AuthClient) Get(ctx context.Context, id int) (*Auth, error) {
 	return c.Query().Where(auth.ID(id)).Only(ctx)
 }
@@ -282,7 +282,7 @@ func (c *TeamClient) Update() *TeamUpdate {
 	return &TeamUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
-// UpdateOne returns an update builder for the given entity.
+// UpdateOne returns an update builder for the given model.
 func (c *TeamClient) UpdateOne(t *Team) *TeamUpdateOne {
 	mutation := newTeamMutation(c.config, OpUpdateOne, withTeam(t))
 	return &TeamUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
@@ -300,7 +300,7 @@ func (c *TeamClient) Delete() *TeamDelete {
 	return &TeamDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
-// DeleteOne returns a delete builder for the given entity.
+// DeleteOne returns a delete builder for the given model.
 func (c *TeamClient) DeleteOne(t *Team) *TeamDeleteOne {
 	return c.DeleteOneID(t.ID)
 }
@@ -320,7 +320,7 @@ func (c *TeamClient) Query() *TeamQuery {
 	}
 }
 
-// Get returns a Team entity by its id.
+// Get returns a Team model by its id.
 func (c *TeamClient) Get(ctx context.Context, id int) (*Team, error) {
 	return c.Query().Where(team.ID(id)).Only(ctx)
 }
@@ -404,7 +404,7 @@ func (c *TeamUserClient) Update() *TeamUserUpdate {
 	return &TeamUserUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
-// UpdateOne returns an update builder for the given entity.
+// UpdateOne returns an update builder for the given model.
 func (c *TeamUserClient) UpdateOne(tu *TeamUser) *TeamUserUpdateOne {
 	mutation := newTeamUserMutation(c.config, OpUpdateOne, withTeamUser(tu))
 	return &TeamUserUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
@@ -422,7 +422,7 @@ func (c *TeamUserClient) Delete() *TeamUserDelete {
 	return &TeamUserDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
-// DeleteOne returns a delete builder for the given entity.
+// DeleteOne returns a delete builder for the given model.
 func (c *TeamUserClient) DeleteOne(tu *TeamUser) *TeamUserDeleteOne {
 	return c.DeleteOneID(tu.ID)
 }
@@ -442,7 +442,7 @@ func (c *TeamUserClient) Query() *TeamUserQuery {
 	}
 }
 
-// Get returns a TeamUser entity by its id.
+// Get returns a TeamUser model by its id.
 func (c *TeamUserClient) Get(ctx context.Context, id int) (*TeamUser, error) {
 	return c.Query().Where(teamuser.ID(id)).Only(ctx)
 }
@@ -526,7 +526,7 @@ func (c *UserClient) Update() *UserUpdate {
 	return &UserUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
-// UpdateOne returns an update builder for the given entity.
+// UpdateOne returns an update builder for the given model.
 func (c *UserClient) UpdateOne(u *User) *UserUpdateOne {
 	mutation := newUserMutation(c.config, OpUpdateOne, withUser(u))
 	return &UserUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
@@ -544,7 +544,7 @@ func (c *UserClient) Delete() *UserDelete {
 	return &UserDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
-// DeleteOne returns a delete builder for the given entity.
+// DeleteOne returns a delete builder for the given model.
 func (c *UserClient) DeleteOne(u *User) *UserDeleteOne {
 	return c.DeleteOneID(u.ID)
 }
@@ -564,7 +564,7 @@ func (c *UserClient) Query() *UserQuery {
 	}
 }
 
-// Get returns a User entity by its id.
+// Get returns a User model by its id.
 func (c *UserClient) Get(ctx context.Context, id int) (*User, error) {
 	return c.Query().Where(user.ID(id)).Only(ctx)
 }

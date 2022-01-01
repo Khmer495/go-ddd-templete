@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Package pulid implements the pulid type.
-// A pulid is an identifier that is a two-byte prefixed ULIDs, with the first two bytes encoding the type of the entity.
+// A pulid is an identifier that is a two-byte prefixed ULIDs, with the first two bytes encoding the type of the model.
 package pulid
 
 import (

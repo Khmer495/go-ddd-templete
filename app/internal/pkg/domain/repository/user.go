@@ -4,15 +4,15 @@ package repository
 import (
 	"context"
 
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 )
 
 type IUserRepository interface {
-	Register(ctx context.Context, u entity.User) error
-	IsExist(ctx context.Context, userId entity.Id) (bool, error)
-	Self(ctx context.Context) (entity.User, error)
-	List(ctx context.Context, limit entity.Limit, page entity.Page) (entity.Users, error)
-	Select(ctx context.Context, limit entity.Limit, page entity.Page, ids entity.Ids) (entity.Users, error)
-	SearchByNamePrefix(ctx context.Context, limit entity.Limit, page entity.Page, un entity.UserName) (entity.Users, error)
-	Change(ctx context.Context, u entity.User) error
+	Register(ctx context.Context, u model.User) error
+	IsExist(ctx context.Context, userId model.Id) (bool, error)
+	Self(ctx context.Context) (model.User, error)
+	List(ctx context.Context, limit model.Limit, page model.Page) (model.Users, error)
+	Select(ctx context.Context, limit model.Limit, page model.Page, ids model.Ids) (model.Users, error)
+	SearchByNamePrefix(ctx context.Context, limit model.Limit, page model.Page, un model.UserName) (model.Users, error)
+	Change(ctx context.Context, u model.User) error
 }

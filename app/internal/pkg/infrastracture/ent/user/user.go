@@ -29,14 +29,14 @@ const (
 	Table = "users"
 	// TeamsTable is the table the holds the teams relation/edge.
 	TeamsTable = "teams"
-	// TeamsInverseTable is the table name for the Team entity.
+	// TeamsInverseTable is the table name for the Team model.
 	// It exists in this package in order to avoid circular dependency with the "team" package.
 	TeamsInverseTable = "teams"
 	// TeamsColumn is the table column denoting the teams relation/edge.
 	TeamsColumn = "create_user_id"
 	// TeamUsersTable is the table the holds the team_users relation/edge.
 	TeamUsersTable = "team_users"
-	// TeamUsersInverseTable is the table name for the TeamUser entity.
+	// TeamUsersInverseTable is the table name for the TeamUser model.
 	// It exists in this package in order to avoid circular dependency with the "teamuser" package.
 	TeamUsersInverseTable = "team_users"
 	// TeamUsersColumn is the table column denoting the team_users relation/edge.

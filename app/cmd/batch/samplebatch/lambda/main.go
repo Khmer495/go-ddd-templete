@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 
-	"github.com/Khmer495/go-templete/internal/app/batch/hoge/handler"
-	"github.com/Khmer495/go-templete/internal/app/batch/hoge/util/di"
+	"github.com/Khmer495/go-templete/internal/app/batch/samplebatch/handler"
+	"github.com/Khmer495/go-templete/internal/app/batch/samplebatch/util/di"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/usecase"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/entmysql"
 	"github.com/Khmer495/go-templete/internal/pkg/util/logger"
 	"github.com/aws/aws-lambda-go/events"
@@ -14,10 +15,10 @@ import (
 
 func lambdaHandler(ctx context.Context, event events.CloudWatchEvent) {
 	d := di.NewDig()
-	targetUTCTime := event.Time
+	triggeredUTCTime := event.Time
 	err := d.Invoke(
-		func() {
-			handler.Handler(targetUTCTime)
+		func(tu usecase.ITeamUsecase) {
+			handler.Handler(ctx, tu, triggeredUTCTime)
 		},
 	)
 	if err != nil {

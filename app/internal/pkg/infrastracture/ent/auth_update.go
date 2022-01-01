@@ -41,7 +41,7 @@ func (au *AuthUpdate) SetFirebaseUserID(s string) *AuthUpdate {
 	return au
 }
 
-// SetUser sets the "user" edge to the User entity.
+// SetUser sets the "user" edge to the User model.
 func (au *AuthUpdate) SetUser(u *User) *AuthUpdate {
 	return au.SetUserID(u.ID)
 }
@@ -51,7 +51,7 @@ func (au *AuthUpdate) Mutation() *AuthMutation {
 	return au.mutation
 }
 
-// ClearUser clears the "user" edge to the User entity.
+// ClearUser clears the "user" edge to the User model.
 func (au *AuthUpdate) ClearUser() *AuthUpdate {
 	au.mutation.ClearUser()
 	return au
@@ -193,7 +193,7 @@ func (au *AuthUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	return n, nil
 }
 
-// AuthUpdateOne is the builder for updating a single Auth entity.
+// AuthUpdateOne is the builder for updating a single Auth model.
 type AuthUpdateOne struct {
 	config
 	fields   []string
@@ -214,7 +214,7 @@ func (auo *AuthUpdateOne) SetFirebaseUserID(s string) *AuthUpdateOne {
 	return auo
 }
 
-// SetUser sets the "user" edge to the User entity.
+// SetUser sets the "user" edge to the User model.
 func (auo *AuthUpdateOne) SetUser(u *User) *AuthUpdateOne {
 	return auo.SetUserID(u.ID)
 }
@@ -224,20 +224,20 @@ func (auo *AuthUpdateOne) Mutation() *AuthMutation {
 	return auo.mutation
 }
 
-// ClearUser clears the "user" edge to the User entity.
+// ClearUser clears the "user" edge to the User model.
 func (auo *AuthUpdateOne) ClearUser() *AuthUpdateOne {
 	auo.mutation.ClearUser()
 	return auo
 }
 
-// Select allows selecting one or more fields (columns) of the returned entity.
-// The default is selecting all fields defined in the entity schema.
+// Select allows selecting one or more fields (columns) of the returned model.
+// The default is selecting all fields defined in the model schema.
 func (auo *AuthUpdateOne) Select(field string, fields ...string) *AuthUpdateOne {
 	auo.fields = append([]string{field}, fields...)
 	return auo
 }
 
-// Save executes the query and returns the updated Auth entity.
+// Save executes the query and returns the updated Auth model.
 func (auo *AuthUpdateOne) Save(ctx context.Context) (*Auth, error) {
 	var (
 		err  error
@@ -281,7 +281,7 @@ func (auo *AuthUpdateOne) SaveX(ctx context.Context) *Auth {
 	return node
 }
 
-// Exec executes the query on the entity.
+// Exec executes the query on the model.
 func (auo *AuthUpdateOne) Exec(ctx context.Context) error {
 	_, err := auo.Save(ctx)
 	return err

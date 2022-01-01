@@ -4,16 +4,16 @@ package usecase
 import (
 	"context"
 
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/repository"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/service"
 	"github.com/Khmer495/go-templete/internal/pkg/util/cerror"
 )
 
 type ITeamUsecase interface {
-	Create(ctx context.Context, name string, description string) (entity.Team, error)
-	GetList(ctx context.Context, limit int, page int, pName *string) (entity.Teams, error)
-	Change(ctx context.Context, teamdId string, pName *string, pDescription *string) (entity.Team, error)
+	Create(ctx context.Context, name string, description string) (model.Team, error)
+	GetList(ctx context.Context, limit int, page int, pName *string) (model.Teams, error)
+	Change(ctx context.Context, teamdId string, pName *string, pDescription *string) (model.Team, error)
 	Delete(ctx context.Context, teamId string) error
 	Join(ctx context.Context, teamId string) error
 }
@@ -39,91 +39,91 @@ func NewTeamUsecase(
 	}
 }
 
-func (tu teamUsecase) Create(ctx context.Context, name string, description string) (entity.Team, error) {
+func (tu teamUsecase) Create(ctx context.Context, name string, description string) (model.Team, error) {
 	createUser, err := tu.ur.Self(ctx)
 	if err != nil {
-		return entity.NilTeam, cerror.WrapInternalServerError(err, "tu.ur.GetSelf")
+		return model.NilTeam, cerror.WrapInternalServerError(err, "tu.ur.GetSelf")
 	}
 
-	team, err := entity.InitTeam(createUser, name, description)
+	team, err := model.InitTeam(createUser, name, description)
 	if err != nil {
-		return entity.NilTeam, parseEntityConstractorError(err, "entity.InitTeam")
+		return model.NilTeam, parsemodelConstractorError(err, "model.InitTeam")
 	}
 
 	err = tu.tr.Create(ctx, team)
 	if err != nil {
-		return entity.NilTeam, cerror.WrapInternalServerError(err, "tu.tr.Create")
+		return model.NilTeam, cerror.WrapInternalServerError(err, "tu.tr.Create")
 	}
 
 	return team, nil
 }
 
-func (tu teamUsecase) GetList(ctx context.Context, limitInt int, pageInt int, pNameString *string) (entity.Teams, error) {
-	limit, err := entity.NewLimit(limitInt)
+func (tu teamUsecase) GetList(ctx context.Context, limitInt int, pageInt int, pNameString *string) (model.Teams, error) {
+	limit, err := model.NewLimit(limitInt)
 	if err != nil {
-		return entity.NilTeams, parseEntityConstractorError(err, "entity.NewLimit")
+		return model.NilTeams, parsemodelConstractorError(err, "model.NewLimit")
 	}
-	page, err := entity.NewPage(pageInt)
+	page, err := model.NewPage(pageInt)
 	if err != nil {
-		return entity.NilTeams, parseEntityConstractorError(err, "entity.NewPage")
+		return model.NilTeams, parsemodelConstractorError(err, "model.NewPage")
 	}
 
 	if pNameString == nil {
 		teams, err := tu.tr.List(ctx, limit, page)
 		if err != nil {
-			return entity.NilTeams, cerror.WrapInternalServerError(err, "tu.tr.List")
+			return model.NilTeams, cerror.WrapInternalServerError(err, "tu.tr.List")
 		}
 		return teams, nil
 	} else {
-		name, err := entity.NewTeamName(*pNameString)
+		name, err := model.NewTeamName(*pNameString)
 		if err != nil {
-			return entity.NilTeams, parseEntityConstractorError(err, "entity.NewTeamName")
+			return model.NilTeams, parsemodelConstractorError(err, "model.NewTeamName")
 		}
 
 		teams, err := tu.tr.SearchByNamePrefix(ctx, limit, page, name)
 		if err != nil {
-			return entity.NilTeams, cerror.WrapInternalServerError(err, "tu.tr.SearchByNamePrefix")
+			return model.NilTeams, cerror.WrapInternalServerError(err, "tu.tr.SearchByNamePrefix")
 		}
 
 		return teams, nil
 	}
 }
 
-func (tu teamUsecase) Change(ctx context.Context, teamIdString string, pName *string, pDescription *string) (entity.Team, error) {
-	teamId, err := entity.NewId(teamIdString)
+func (tu teamUsecase) Change(ctx context.Context, teamIdString string, pName *string, pDescription *string) (model.Team, error) {
+	teamId, err := model.NewId(teamIdString)
 	if err != nil {
-		return entity.NilTeam, cerror.WrapNotFoundError(err, "entity.NewId", "指定のチームが存在しません。")
+		return model.NilTeam, cerror.WrapNotFoundError(err, "model.NewId", "指定のチームが存在しません。")
 	}
 	team, err := tu.tr.One(ctx, teamId)
 	if err != nil {
-		return entity.NilTeam, cerror.WrapNotFoundError(err, "tu.tr.One", "指定のチームが存在しません。")
+		return model.NilTeam, cerror.WrapNotFoundError(err, "tu.tr.One", "指定のチームが存在しません。")
 	}
 
 	if pName != nil {
 		err := team.SetName(*pName)
 		if err != nil {
-			return entity.NilTeam, parseEntityConstractorError(err, "team.SetName")
+			return model.NilTeam, parsemodelConstractorError(err, "team.SetName")
 		}
 	}
 	if pDescription != nil {
 		err := team.SetDesctiprion(*pDescription)
 		if err != nil {
-			return entity.NilTeam, parseEntityConstractorError(err, "team.SetDesctiprion")
+			return model.NilTeam, parsemodelConstractorError(err, "team.SetDesctiprion")
 		}
 	}
 
 	err = tu.tr.Change(ctx, team)
 	if err != nil {
-		return entity.NilTeam, cerror.WrapInternalServerError(err, "tu.tr.Change")
+		return model.NilTeam, cerror.WrapInternalServerError(err, "tu.tr.Change")
 	}
 
 	return team, nil
 }
 
 func (tu teamUsecase) Delete(ctx context.Context, teamIdString string) error {
-	teamId, err := entity.NewId(teamIdString)
+	teamId, err := model.NewId(teamIdString)
 	if err != nil {
-		return cerror.WrapNotFoundError(err, "entity.NewId", "指定のチームが存在しません。")
+		return cerror.WrapNotFoundError(err, "model.NewId", "指定のチームが存在しません。")
 	}
 	team, err := tu.tr.One(ctx, teamId)
 	if err != nil {
@@ -139,9 +139,9 @@ func (tu teamUsecase) Delete(ctx context.Context, teamIdString string) error {
 }
 
 func (tu teamUsecase) Join(ctx context.Context, teamIdString string) error {
-	teamId, err := entity.NewId(teamIdString)
+	teamId, err := model.NewId(teamIdString)
 	if err != nil {
-		return cerror.WrapNotFoundError(err, "entity.NewId", "指定のチームが存在しません。")
+		return cerror.WrapNotFoundError(err, "model.NewId", "指定のチームが存在しません。")
 	}
 	team, err := tu.tr.One(ctx, teamId)
 	if err != nil {

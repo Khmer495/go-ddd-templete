@@ -15,7 +15,7 @@ import (
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/user"
 )
 
-// TeamUserCreate is the builder for creating a TeamUser entity.
+// TeamUserCreate is the builder for creating a TeamUser model.
 type TeamUserCreate struct {
 	config
 	mutation *TeamUserMutation
@@ -62,12 +62,12 @@ func (tuc *TeamUserCreate) SetUserID(i int) *TeamUserCreate {
 	return tuc
 }
 
-// SetTeam sets the "team" edge to the Team entity.
+// SetTeam sets the "team" edge to the Team model.
 func (tuc *TeamUserCreate) SetTeam(t *Team) *TeamUserCreate {
 	return tuc.SetTeamID(t.ID)
 }
 
-// SetUser sets the "user" edge to the User entity.
+// SetUser sets the "user" edge to the User model.
 func (tuc *TeamUserCreate) SetUser(u *User) *TeamUserCreate {
 	return tuc.SetUserID(u.ID)
 }

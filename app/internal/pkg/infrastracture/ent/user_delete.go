@@ -13,7 +13,7 @@ import (
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/user"
 )
 
-// UserDelete is the builder for deleting a User entity.
+// UserDelete is the builder for deleting a User model.
 type UserDelete struct {
 	config
 	hooks    []Hook
@@ -84,7 +84,7 @@ func (ud *UserDelete) sqlExec(ctx context.Context) (int, error) {
 	return sqlgraph.DeleteNodes(ctx, ud.driver, _spec)
 }
 
-// UserDeleteOne is the builder for deleting a single User entity.
+// UserDeleteOne is the builder for deleting a single User model.
 type UserDeleteOne struct {
 	ud *UserDelete
 }

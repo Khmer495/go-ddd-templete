@@ -69,18 +69,18 @@ func (tu *TeamUpdate) SetDescription(s string) *TeamUpdate {
 	return tu
 }
 
-// SetCreateUser sets the "create_user" edge to the User entity.
+// SetCreateUser sets the "create_user" edge to the User model.
 func (tu *TeamUpdate) SetCreateUser(u *User) *TeamUpdate {
 	return tu.SetCreateUserID(u.ID)
 }
 
-// AddTeamUserIDs adds the "team_users" edge to the TeamUser entity by IDs.
+// AddTeamUserIDs adds the "team_users" edge to the TeamUser model by IDs.
 func (tu *TeamUpdate) AddTeamUserIDs(ids ...int) *TeamUpdate {
 	tu.mutation.AddTeamUserIDs(ids...)
 	return tu
 }
 
-// AddTeamUsers adds the "team_users" edges to the TeamUser entity.
+// AddTeamUsers adds the "team_users" edges to the TeamUser model.
 func (tu *TeamUpdate) AddTeamUsers(t ...*TeamUser) *TeamUpdate {
 	ids := make([]int, len(t))
 	for i := range t {
@@ -94,13 +94,13 @@ func (tu *TeamUpdate) Mutation() *TeamMutation {
 	return tu.mutation
 }
 
-// ClearCreateUser clears the "create_user" edge to the User entity.
+// ClearCreateUser clears the "create_user" edge to the User model.
 func (tu *TeamUpdate) ClearCreateUser() *TeamUpdate {
 	tu.mutation.ClearCreateUser()
 	return tu
 }
 
-// ClearTeamUsers clears all "team_users" edges to the TeamUser entity.
+// ClearTeamUsers clears all "team_users" edges to the TeamUser model.
 func (tu *TeamUpdate) ClearTeamUsers() *TeamUpdate {
 	tu.mutation.ClearTeamUsers()
 	return tu
@@ -347,7 +347,7 @@ func (tu *TeamUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	return n, nil
 }
 
-// TeamUpdateOne is the builder for updating a single Team entity.
+// TeamUpdateOne is the builder for updating a single Team model.
 type TeamUpdateOne struct {
 	config
 	fields   []string
@@ -394,18 +394,18 @@ func (tuo *TeamUpdateOne) SetDescription(s string) *TeamUpdateOne {
 	return tuo
 }
 
-// SetCreateUser sets the "create_user" edge to the User entity.
+// SetCreateUser sets the "create_user" edge to the User model.
 func (tuo *TeamUpdateOne) SetCreateUser(u *User) *TeamUpdateOne {
 	return tuo.SetCreateUserID(u.ID)
 }
 
-// AddTeamUserIDs adds the "team_users" edge to the TeamUser entity by IDs.
+// AddTeamUserIDs adds the "team_users" edge to the TeamUser model by IDs.
 func (tuo *TeamUpdateOne) AddTeamUserIDs(ids ...int) *TeamUpdateOne {
 	tuo.mutation.AddTeamUserIDs(ids...)
 	return tuo
 }
 
-// AddTeamUsers adds the "team_users" edges to the TeamUser entity.
+// AddTeamUsers adds the "team_users" edges to the TeamUser model.
 func (tuo *TeamUpdateOne) AddTeamUsers(t ...*TeamUser) *TeamUpdateOne {
 	ids := make([]int, len(t))
 	for i := range t {
@@ -419,13 +419,13 @@ func (tuo *TeamUpdateOne) Mutation() *TeamMutation {
 	return tuo.mutation
 }
 
-// ClearCreateUser clears the "create_user" edge to the User entity.
+// ClearCreateUser clears the "create_user" edge to the User model.
 func (tuo *TeamUpdateOne) ClearCreateUser() *TeamUpdateOne {
 	tuo.mutation.ClearCreateUser()
 	return tuo
 }
 
-// ClearTeamUsers clears all "team_users" edges to the TeamUser entity.
+// ClearTeamUsers clears all "team_users" edges to the TeamUser model.
 func (tuo *TeamUpdateOne) ClearTeamUsers() *TeamUpdateOne {
 	tuo.mutation.ClearTeamUsers()
 	return tuo
@@ -446,14 +446,14 @@ func (tuo *TeamUpdateOne) RemoveTeamUsers(t ...*TeamUser) *TeamUpdateOne {
 	return tuo.RemoveTeamUserIDs(ids...)
 }
 
-// Select allows selecting one or more fields (columns) of the returned entity.
-// The default is selecting all fields defined in the entity schema.
+// Select allows selecting one or more fields (columns) of the returned model.
+// The default is selecting all fields defined in the model schema.
 func (tuo *TeamUpdateOne) Select(field string, fields ...string) *TeamUpdateOne {
 	tuo.fields = append([]string{field}, fields...)
 	return tuo
 }
 
-// Save executes the query and returns the updated Team entity.
+// Save executes the query and returns the updated Team model.
 func (tuo *TeamUpdateOne) Save(ctx context.Context) (*Team, error) {
 	var (
 		err  error
@@ -498,7 +498,7 @@ func (tuo *TeamUpdateOne) SaveX(ctx context.Context) *Team {
 	return node
 }
 
-// Exec executes the query on the entity.
+// Exec executes the query on the model.
 func (tuo *TeamUpdateOne) Exec(ctx context.Context) error {
 	_, err := tuo.Save(ctx)
 	return err

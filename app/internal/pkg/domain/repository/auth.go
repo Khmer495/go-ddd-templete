@@ -4,10 +4,10 @@ package repository
 import (
 	"context"
 
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 )
 
 type IAuthRepository interface {
 	FindUserPkByFirebaseUserId(ctx context.Context) (int, error)
-	FindUserIdByFirebaseUserId(ctx context.Context) (entity.Id, error)
+	FindUserIdByFirebaseUserId(ctx context.Context) (model.Id, error)
 }

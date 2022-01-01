@@ -64,12 +64,12 @@ func (tuu *TeamUserUpdate) SetUserID(i int) *TeamUserUpdate {
 	return tuu
 }
 
-// SetTeam sets the "team" edge to the Team entity.
+// SetTeam sets the "team" edge to the Team model.
 func (tuu *TeamUserUpdate) SetTeam(t *Team) *TeamUserUpdate {
 	return tuu.SetTeamID(t.ID)
 }
 
-// SetUser sets the "user" edge to the User entity.
+// SetUser sets the "user" edge to the User model.
 func (tuu *TeamUserUpdate) SetUser(u *User) *TeamUserUpdate {
 	return tuu.SetUserID(u.ID)
 }
@@ -79,13 +79,13 @@ func (tuu *TeamUserUpdate) Mutation() *TeamUserMutation {
 	return tuu.mutation
 }
 
-// ClearTeam clears the "team" edge to the Team entity.
+// ClearTeam clears the "team" edge to the Team model.
 func (tuu *TeamUserUpdate) ClearTeam() *TeamUserUpdate {
 	tuu.mutation.ClearTeam()
 	return tuu
 }
 
-// ClearUser clears the "user" edge to the User entity.
+// ClearUser clears the "user" edge to the User model.
 func (tuu *TeamUserUpdate) ClearUser() *TeamUserUpdate {
 	tuu.mutation.ClearUser()
 	return tuu
@@ -271,7 +271,7 @@ func (tuu *TeamUserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	return n, nil
 }
 
-// TeamUserUpdateOne is the builder for updating a single TeamUser entity.
+// TeamUserUpdateOne is the builder for updating a single TeamUser model.
 type TeamUserUpdateOne struct {
 	config
 	fields   []string
@@ -313,12 +313,12 @@ func (tuuo *TeamUserUpdateOne) SetUserID(i int) *TeamUserUpdateOne {
 	return tuuo
 }
 
-// SetTeam sets the "team" edge to the Team entity.
+// SetTeam sets the "team" edge to the Team model.
 func (tuuo *TeamUserUpdateOne) SetTeam(t *Team) *TeamUserUpdateOne {
 	return tuuo.SetTeamID(t.ID)
 }
 
-// SetUser sets the "user" edge to the User entity.
+// SetUser sets the "user" edge to the User model.
 func (tuuo *TeamUserUpdateOne) SetUser(u *User) *TeamUserUpdateOne {
 	return tuuo.SetUserID(u.ID)
 }
@@ -328,26 +328,26 @@ func (tuuo *TeamUserUpdateOne) Mutation() *TeamUserMutation {
 	return tuuo.mutation
 }
 
-// ClearTeam clears the "team" edge to the Team entity.
+// ClearTeam clears the "team" edge to the Team model.
 func (tuuo *TeamUserUpdateOne) ClearTeam() *TeamUserUpdateOne {
 	tuuo.mutation.ClearTeam()
 	return tuuo
 }
 
-// ClearUser clears the "user" edge to the User entity.
+// ClearUser clears the "user" edge to the User model.
 func (tuuo *TeamUserUpdateOne) ClearUser() *TeamUserUpdateOne {
 	tuuo.mutation.ClearUser()
 	return tuuo
 }
 
-// Select allows selecting one or more fields (columns) of the returned entity.
-// The default is selecting all fields defined in the entity schema.
+// Select allows selecting one or more fields (columns) of the returned model.
+// The default is selecting all fields defined in the model schema.
 func (tuuo *TeamUserUpdateOne) Select(field string, fields ...string) *TeamUserUpdateOne {
 	tuuo.fields = append([]string{field}, fields...)
 	return tuuo
 }
 
-// Save executes the query and returns the updated TeamUser entity.
+// Save executes the query and returns the updated TeamUser model.
 func (tuuo *TeamUserUpdateOne) Save(ctx context.Context) (*TeamUser, error) {
 	var (
 		err  error
@@ -391,7 +391,7 @@ func (tuuo *TeamUserUpdateOne) SaveX(ctx context.Context) *TeamUser {
 	return node
 }
 
-// Exec executes the query on the entity.
+// Exec executes the query on the model.
 func (tuuo *TeamUserUpdateOne) Exec(ctx context.Context) error {
 	_, err := tuuo.Save(ctx)
 	return err

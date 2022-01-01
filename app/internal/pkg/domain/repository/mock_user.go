@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	entity "github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	model "github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -36,7 +36,7 @@ func (m *MockIUserRepository) EXPECT() *MockIUserRepositoryMockRecorder {
 }
 
 // Change mocks base method.
-func (m *MockIUserRepository) Change(ctx context.Context, u entity.User) error {
+func (m *MockIUserRepository) Change(ctx context.Context, u model.User) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Change", ctx, u)
 	ret0, _ := ret[0].(error)
@@ -50,7 +50,7 @@ func (mr *MockIUserRepositoryMockRecorder) Change(ctx, u interface{}) *gomock.Ca
 }
 
 // IsExist mocks base method.
-func (m *MockIUserRepository) IsExist(ctx context.Context, userId entity.Id) (bool, error) {
+func (m *MockIUserRepository) IsExist(ctx context.Context, userId model.Id) (bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "IsExist", ctx, userId)
 	ret0, _ := ret[0].(bool)
@@ -65,10 +65,10 @@ func (mr *MockIUserRepositoryMockRecorder) IsExist(ctx, userId interface{}) *gom
 }
 
 // List mocks base method.
-func (m *MockIUserRepository) List(ctx context.Context, limit entity.Limit, page entity.Page) (entity.Users, error) {
+func (m *MockIUserRepository) List(ctx context.Context, limit model.Limit, page model.Page) (model.Users, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", ctx, limit, page)
-	ret0, _ := ret[0].(entity.Users)
+	ret0, _ := ret[0].(model.Users)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -80,7 +80,7 @@ func (mr *MockIUserRepositoryMockRecorder) List(ctx, limit, page interface{}) *g
 }
 
 // Register mocks base method.
-func (m *MockIUserRepository) Register(ctx context.Context, u entity.User) error {
+func (m *MockIUserRepository) Register(ctx context.Context, u model.User) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Register", ctx, u)
 	ret0, _ := ret[0].(error)
@@ -94,10 +94,10 @@ func (mr *MockIUserRepositoryMockRecorder) Register(ctx, u interface{}) *gomock.
 }
 
 // SearchByNamePrefix mocks base method.
-func (m *MockIUserRepository) SearchByNamePrefix(ctx context.Context, limit entity.Limit, page entity.Page, un entity.UserName) (entity.Users, error) {
+func (m *MockIUserRepository) SearchByNamePrefix(ctx context.Context, limit model.Limit, page model.Page, un model.UserName) (model.Users, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchByNamePrefix", ctx, limit, page, un)
-	ret0, _ := ret[0].(entity.Users)
+	ret0, _ := ret[0].(model.Users)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -109,10 +109,10 @@ func (mr *MockIUserRepositoryMockRecorder) SearchByNamePrefix(ctx, limit, page, 
 }
 
 // Select mocks base method.
-func (m *MockIUserRepository) Select(ctx context.Context, limit entity.Limit, page entity.Page, ids entity.Ids) (entity.Users, error) {
+func (m *MockIUserRepository) Select(ctx context.Context, limit model.Limit, page model.Page, ids model.Ids) (model.Users, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Select", ctx, limit, page, ids)
-	ret0, _ := ret[0].(entity.Users)
+	ret0, _ := ret[0].(model.Users)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -124,10 +124,10 @@ func (mr *MockIUserRepositoryMockRecorder) Select(ctx, limit, page, ids interfac
 }
 
 // Self mocks base method.
-func (m *MockIUserRepository) Self(ctx context.Context) (entity.User, error) {
+func (m *MockIUserRepository) Self(ctx context.Context) (model.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Self", ctx)
-	ret0, _ := ret[0].(entity.User)
+	ret0, _ := ret[0].(model.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

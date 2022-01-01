@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	entity "github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	model "github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -36,10 +36,10 @@ func (m *MockIUserUsecase) EXPECT() *MockIUserUsecaseMockRecorder {
 }
 
 // ChangeSelfProfile mocks base method.
-func (m *MockIUserUsecase) ChangeSelfProfile(ctx context.Context, pName *string) (entity.User, error) {
+func (m *MockIUserUsecase) ChangeSelfProfile(ctx context.Context, pName *string) (model.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ChangeSelfProfile", ctx, pName)
-	ret0, _ := ret[0].(entity.User)
+	ret0, _ := ret[0].(model.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -51,10 +51,10 @@ func (mr *MockIUserUsecaseMockRecorder) ChangeSelfProfile(ctx, pName interface{}
 }
 
 // GetList mocks base method.
-func (m *MockIUserUsecase) GetList(ctx context.Context, limit, page int, pName *string) (entity.Users, error) {
+func (m *MockIUserUsecase) GetList(ctx context.Context, limit, page int, pName *string) (model.Users, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetList", ctx, limit, page, pName)
-	ret0, _ := ret[0].(entity.Users)
+	ret0, _ := ret[0].(model.Users)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -66,10 +66,10 @@ func (mr *MockIUserUsecaseMockRecorder) GetList(ctx, limit, page, pName interfac
 }
 
 // GetSelfProfile mocks base method.
-func (m *MockIUserUsecase) GetSelfProfile(ctx context.Context) (entity.User, error) {
+func (m *MockIUserUsecase) GetSelfProfile(ctx context.Context) (model.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetSelfProfile", ctx)
-	ret0, _ := ret[0].(entity.User)
+	ret0, _ := ret[0].(model.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -81,10 +81,10 @@ func (mr *MockIUserUsecaseMockRecorder) GetSelfProfile(ctx interface{}) *gomock.
 }
 
 // Register mocks base method.
-func (m *MockIUserUsecase) Register(ctx context.Context, name string) (entity.User, error) {
+func (m *MockIUserUsecase) Register(ctx context.Context, name string) (model.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Register", ctx, name)
-	ret0, _ := ret[0].(entity.User)
+	ret0, _ := ret[0].(model.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

@@ -1,7 +1,7 @@
 package entmysql
 
 import (
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/user"
 )
@@ -13,7 +13,7 @@ func userQuerySelect(uq *ent.UserQuery) {
 	)
 }
 
-func userQueryFind(uq *ent.UserQuery, userId entity.Id) {
+func userQueryFind(uq *ent.UserQuery, userId model.Id) {
 	uq.Where(
 		uniqueUserPredicate(userId)...,
 	)
@@ -33,10 +33,10 @@ func userQueryOrder(uq *ent.UserQuery) {
 	)
 }
 
-func userQueryPaging(uq *ent.UserQuery, limit entity.Limit, page entity.Page) {
-	if limit != entity.NilLimit {
+func userQueryPaging(uq *ent.UserQuery, limit model.Limit, page model.Page) {
+	if limit != model.NilLimit {
 		uq.Limit(limit.Int())
-		if page != entity.NilPage {
+		if page != model.NilPage {
 			uq.Offset((page.Int() - 1) * limit.Int())
 		}
 	}

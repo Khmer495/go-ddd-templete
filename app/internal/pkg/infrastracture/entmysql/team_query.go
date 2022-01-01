@@ -1,7 +1,7 @@
 package entmysql
 
 import (
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/team"
 )
@@ -13,7 +13,7 @@ func teamQuerySelect(tq *ent.TeamQuery) {
 	)
 }
 
-func teamQueryFind(tq *ent.TeamQuery, teamId entity.Id) {
+func teamQueryFind(tq *ent.TeamQuery, teamId model.Id) {
 	tq.Where(
 		uniqueTeamPredicate(teamId)...,
 	)
@@ -39,10 +39,10 @@ func teamQueryOrder(tq *ent.TeamQuery) {
 	)
 }
 
-func teamQueryPaging(tq *ent.TeamQuery, limit entity.Limit, page entity.Page) {
-	if limit != entity.NilLimit {
+func teamQueryPaging(tq *ent.TeamQuery, limit model.Limit, page model.Page) {
+	if limit != model.NilLimit {
 		tq.Limit(limit.Int())
-		if page != entity.NilPage {
+		if page != model.NilPage {
 			tq.Offset((page.Int() - 1) * limit.Int())
 		}
 	}

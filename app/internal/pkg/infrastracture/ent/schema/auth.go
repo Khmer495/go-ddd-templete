@@ -7,7 +7,7 @@ import (
 	"entgo.io/ent/schema/index"
 )
 
-// Auth holds the schema definition for the Auth entity.
+// Auth holds the schema definition for the Auth model.
 type Auth struct {
 	ent.Schema
 }

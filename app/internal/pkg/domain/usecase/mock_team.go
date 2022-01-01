@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	entity "github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	model "github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -36,10 +36,10 @@ func (m *MockITeamUsecase) EXPECT() *MockITeamUsecaseMockRecorder {
 }
 
 // Change mocks base method.
-func (m *MockITeamUsecase) Change(ctx context.Context, teamdId string, pName, pDescription *string) (entity.Team, error) {
+func (m *MockITeamUsecase) Change(ctx context.Context, teamdId string, pName, pDescription *string) (model.Team, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Change", ctx, teamdId, pName, pDescription)
-	ret0, _ := ret[0].(entity.Team)
+	ret0, _ := ret[0].(model.Team)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -51,10 +51,10 @@ func (mr *MockITeamUsecaseMockRecorder) Change(ctx, teamdId, pName, pDescription
 }
 
 // Create mocks base method.
-func (m *MockITeamUsecase) Create(ctx context.Context, name, description string) (entity.Team, error) {
+func (m *MockITeamUsecase) Create(ctx context.Context, name, description string) (model.Team, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, name, description)
-	ret0, _ := ret[0].(entity.Team)
+	ret0, _ := ret[0].(model.Team)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -80,10 +80,10 @@ func (mr *MockITeamUsecaseMockRecorder) Delete(ctx, teamId interface{}) *gomock.
 }
 
 // GetList mocks base method.
-func (m *MockITeamUsecase) GetList(ctx context.Context, limit, page int, pName *string) (entity.Teams, error) {
+func (m *MockITeamUsecase) GetList(ctx context.Context, limit, page int, pName *string) (model.Teams, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetList", ctx, limit, page, pName)
-	ret0, _ := ret[0].(entity.Teams)
+	ret0, _ := ret[0].(model.Teams)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

@@ -4,16 +4,16 @@ package repository
 import (
 	"context"
 
-	entity "github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	model "github.com/Khmer495/go-templete/internal/pkg/domain/model"
 )
 
 type ITeamRepository interface {
-	Create(ctx context.Context, t entity.Team) error
-	IsExist(ctx context.Context, teamId entity.Id) (bool, error)
-	One(ctx context.Context, teamId entity.Id) (entity.Team, error)
-	List(ctx context.Context, limit entity.Limit, page entity.Page) (entity.Teams, error)
-	SearchByNamePrefix(ctx context.Context, limit entity.Limit, page entity.Page, un entity.TeamName) (entity.Teams, error)
-	Change(ctx context.Context, t entity.Team) error
-	Delete(ctx context.Context, teamId entity.Id) error
-	Join(ctx context.Context, teamId entity.Id, userId entity.Id) error
+	Create(ctx context.Context, t model.Team) error
+	IsExist(ctx context.Context, teamId model.Id) (bool, error)
+	One(ctx context.Context, teamId model.Id) (model.Team, error)
+	List(ctx context.Context, limit model.Limit, page model.Page) (model.Teams, error)
+	SearchByNamePrefix(ctx context.Context, limit model.Limit, page model.Page, un model.TeamName) (model.Teams, error)
+	Change(ctx context.Context, t model.Team) error
+	Delete(ctx context.Context, teamId model.Id) error
+	Join(ctx context.Context, teamId model.Id, userId model.Id) error
 }

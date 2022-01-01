@@ -13,7 +13,7 @@ import (
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/predicate"
 )
 
-// AuthDelete is the builder for deleting a Auth entity.
+// AuthDelete is the builder for deleting a Auth model.
 type AuthDelete struct {
 	config
 	hooks    []Hook
@@ -84,7 +84,7 @@ func (ad *AuthDelete) sqlExec(ctx context.Context) (int, error) {
 	return sqlgraph.DeleteNodes(ctx, ad.driver, _spec)
 }
 
-// AuthDeleteOne is the builder for deleting a single Auth entity.
+// AuthDeleteOne is the builder for deleting a single Auth model.
 type AuthDeleteOne struct {
 	ad *AuthDelete
 }

@@ -7,7 +7,7 @@ import (
 	"entgo.io/ent/schema/index"
 )
 
-// Team holds the schema definition for the Team entity.
+// Team holds the schema definition for the Team model.
 type Team struct {
 	ent.Schema
 }

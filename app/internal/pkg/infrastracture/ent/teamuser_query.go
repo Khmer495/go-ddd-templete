@@ -109,7 +109,7 @@ func (tuq *TeamUserQuery) QueryUser() *UserQuery {
 	return query
 }
 
-// First returns the first TeamUser entity from the query.
+// First returns the first TeamUser model from the query.
 // Returns a *NotFoundError when no TeamUser was found.
 func (tuq *TeamUserQuery) First(ctx context.Context) (*TeamUser, error) {
 	nodes, err := tuq.Limit(1).All(ctx)
@@ -154,8 +154,8 @@ func (tuq *TeamUserQuery) FirstIDX(ctx context.Context) int {
 	return id
 }
 
-// Only returns a single TeamUser entity found by the query, ensuring it only returns one.
-// Returns a *NotSingularError when exactly one TeamUser entity is not found.
+// Only returns a single TeamUser model found by the query, ensuring it only returns one.
+// Returns a *NotSingularError when exactly one TeamUser model is not found.
 // Returns a *NotFoundError when no TeamUser entities are found.
 func (tuq *TeamUserQuery) Only(ctx context.Context) (*TeamUser, error) {
 	nodes, err := tuq.Limit(2).All(ctx)
@@ -348,7 +348,7 @@ func (tuq *TeamUserQuery) GroupBy(field string, fields ...string) *TeamUserGroup
 }
 
 // Select allows the selection one or more fields/columns for the given query,
-// instead of selecting all fields in the entity.
+// instead of selecting all fields in the model.
 //
 // Example:
 //

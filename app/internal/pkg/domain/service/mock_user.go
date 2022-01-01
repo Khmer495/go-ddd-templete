@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	entity "github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	model "github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -36,7 +36,7 @@ func (m *MockIUserService) EXPECT() *MockIUserServiceMockRecorder {
 }
 
 // IsSelf mocks base method.
-func (m *MockIUserService) IsSelf(ctx context.Context, userId entity.Id) (bool, error) {
+func (m *MockIUserService) IsSelf(ctx context.Context, userId model.Id) (bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "IsSelf", ctx, userId)
 	ret0, _ := ret[0].(bool)
@@ -51,10 +51,10 @@ func (mr *MockIUserServiceMockRecorder) IsSelf(ctx, userId interface{}) *gomock.
 }
 
 // SelfId mocks base method.
-func (m *MockIUserService) SelfId(ctx context.Context) (entity.Id, error) {
+func (m *MockIUserService) SelfId(ctx context.Context) (model.Id, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SelfId", ctx)
-	ret0, _ := ret[0].(entity.Id)
+	ret0, _ := ret[0].(model.Id)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

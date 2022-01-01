@@ -85,7 +85,7 @@ func (aq *AuthQuery) QueryUser() *UserQuery {
 	return query
 }
 
-// First returns the first Auth entity from the query.
+// First returns the first Auth model from the query.
 // Returns a *NotFoundError when no Auth was found.
 func (aq *AuthQuery) First(ctx context.Context) (*Auth, error) {
 	nodes, err := aq.Limit(1).All(ctx)
@@ -130,8 +130,8 @@ func (aq *AuthQuery) FirstIDX(ctx context.Context) int {
 	return id
 }
 
-// Only returns a single Auth entity found by the query, ensuring it only returns one.
-// Returns a *NotSingularError when exactly one Auth entity is not found.
+// Only returns a single Auth model found by the query, ensuring it only returns one.
+// Returns a *NotSingularError when exactly one Auth model is not found.
 // Returns a *NotFoundError when no Auth entities are found.
 func (aq *AuthQuery) Only(ctx context.Context) (*Auth, error) {
 	nodes, err := aq.Limit(2).All(ctx)
@@ -312,7 +312,7 @@ func (aq *AuthQuery) GroupBy(field string, fields ...string) *AuthGroupBy {
 }
 
 // Select allows the selection one or more fields/columns for the given query,
-// instead of selecting all fields in the entity.
+// instead of selecting all fields in the model.
 //
 // Example:
 //

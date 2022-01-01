@@ -11,7 +11,7 @@ import (
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/user"
 )
 
-// User is the model entity for the User schema.
+// User is the model model for the User schema.
 type User struct {
 	config `json:"-"`
 	// ID of the ent.
@@ -128,12 +128,12 @@ func (u *User) assignValues(columns []string, values []interface{}) error {
 	return nil
 }
 
-// QueryTeams queries the "teams" edge of the User entity.
+// QueryTeams queries the "teams" edge of the User model.
 func (u *User) QueryTeams() *TeamQuery {
 	return (&UserClient{config: u.config}).QueryTeams(u)
 }
 
-// QueryTeamUsers queries the "team_users" edge of the User entity.
+// QueryTeamUsers queries the "team_users" edge of the User model.
 func (u *User) QueryTeamUsers() *TeamUserQuery {
 	return (&UserClient{config: u.config}).QueryTeamUsers(u)
 }
@@ -145,12 +145,12 @@ func (u *User) Update() *UserUpdateOne {
 	return (&UserClient{config: u.config}).UpdateOne(u)
 }
 
-// Unwrap unwraps the User entity that was returned from a transaction after it was closed,
+// Unwrap unwraps the User model that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
 func (u *User) Unwrap() *User {
 	tx, ok := u.config.driver.(*txDriver)
 	if !ok {
-		panic("ent: User is not a transactional entity")
+		panic("ent: User is not a transactional model")
 	}
 	u.config.driver = tx.drv
 	return u

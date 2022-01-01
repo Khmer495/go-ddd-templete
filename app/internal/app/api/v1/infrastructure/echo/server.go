@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Khmer495/go-templete/internal/app/api/v1/appconfig"
+	"github.com/Khmer495/go-templete/internal/app/api/v1/config"
 	"github.com/Khmer495/go-templete/internal/app/api/v1/openapi"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -53,10 +53,5 @@ func NewEchoServer(authValidator middleware.KeyAuthValidator, openapiHandler ope
 	apiv1auth.Use(middleware.KeyAuth(authValidator))
 	openapiRegisterHandlersWithAuth(apiv1auth, openapiHandler)
 
-	e.Logger.Fatal(e.Start(fmt.Sprintf("0.0.0.0:%s", appconfig.RestPort)))
-}
-
-type CostomContext struct {
-	echo.Context
-	UserId string
+	e.Logger.Fatal(e.Start(fmt.Sprintf("0.0.0.0:%s", config.RestPort)))
 }

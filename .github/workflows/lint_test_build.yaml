@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       is-api-v1-changed: ${{ steps.is_changed.outputs.api-v1 }}
-      is-batch-hoge-changed: ${{ steps.is_changed.outputs.batch-hoge }}
+      is-batch-samplebatch-changed: ${{ steps.is_changed.outputs.batch-samplebatch }}
     steps:
       - name: Check out
         uses: actions/checkout@v2
@@ -31,9 +31,9 @@ jobs:
               - app/internal/pkg/**
               - app/go.mod
               - app/go.sum
-            batch-hoge:
-              - app/cmd/batch/batch-hoge/**
-              - app/internal/app/batch/hoge/**
+            batch-samplebatch:
+              - app/cmd/batch/batch-samplebatch/**
+              - app/internal/app/batch/samplebatch/**
               - app/internal/pkg/**
               - app/go.mod
               - app/go.sum
@@ -151,12 +151,12 @@ jobs:
         working-directory: ${{ env.GO_DIR }}
         run: GOARCH=amd64 GOOS=linux go build cmd/${{ env.APP }}/${{ env.VER }}/main.go
 
-  build-batch-hoge:
+  build-batch-samplebatch:
     needs: [setup, lint, test]
-    if: ${{ needs.setup.outputs.is-batch-hoge-changed == 'true' }}
+    if: ${{ needs.setup.outputs.is-batch-samplebatch-changed == 'true' }}
     runs-on: ubuntu-latest
     env:
-      APP: hoge
+      APP: samplebatch
     steps:
       - name: Check out
         uses: actions/checkout@v2

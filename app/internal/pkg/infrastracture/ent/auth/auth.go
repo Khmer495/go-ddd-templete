@@ -17,7 +17,7 @@ const (
 	Table = "auths"
 	// UserTable is the table the holds the user relation/edge.
 	UserTable = "auths"
-	// UserInverseTable is the table name for the User entity.
+	// UserInverseTable is the table name for the User model.
 	// It exists in this package in order to avoid circular dependency with the "user" package.
 	UserInverseTable = "users"
 	// UserColumn is the table column denoting the user relation/edge.

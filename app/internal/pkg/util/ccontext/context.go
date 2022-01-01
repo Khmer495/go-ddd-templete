@@ -3,7 +3,7 @@ package ccontext
 import (
 	"context"
 
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/util/cerror"
 	"golang.org/x/xerrors"
 )
@@ -29,23 +29,23 @@ func GetFirebaseUserId(ctx context.Context) (string, error) {
 
 type userIdKey struct{}
 
-func SetUserId(ctx context.Context, val entity.Id) context.Context {
+func SetUserId(ctx context.Context, val model.Id) context.Context {
 	ctx = context.WithValue(ctx, userIdKey{}, val.Ulid().String())
 	return ctx
 }
 
-func GetUserId(ctx context.Context) (entity.Id, error) {
+func GetUserId(ctx context.Context) (model.Id, error) {
 	val := ctx.Value(userIdKey{})
 	if val == nil {
-		return entity.NilId, cerror.New(cerror.ErrorLevel, cerror.NotFoundErrorCode, "ctx.Value", cerror.InterServerErrorCode.ToString())
+		return model.NilId, cerror.New(cerror.ErrorLevel, cerror.NotFoundErrorCode, "ctx.Value", cerror.InterServerErrorCode.ToString())
 	}
 	valString, ok := val.(string)
 	if !ok {
-		return entity.NilId, cerror.New(cerror.ErrorLevel, cerror.InterServerErrorCode, "ctx.Value.(string)", cerror.InterServerErrorCode.ToString())
+		return model.NilId, cerror.New(cerror.ErrorLevel, cerror.InterServerErrorCode, "ctx.Value.(string)", cerror.InterServerErrorCode.ToString())
 	}
-	userId, err := entity.NewId(valString)
+	userId, err := model.NewId(valString)
 	if err != nil {
-		return entity.NilId, xerrors.Errorf("entity.NewId: %w", err)
+		return model.NilId, xerrors.Errorf("model.NewId: %w", err)
 	}
 	return userId, nil
 }

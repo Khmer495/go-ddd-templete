@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	entity "github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	model "github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -36,7 +36,7 @@ func (m *MockITeamService) EXPECT() *MockITeamServiceMockRecorder {
 }
 
 // IsExist mocks base method.
-func (m *MockITeamService) IsExist(ctx context.Context, teamId entity.Id) (bool, error) {
+func (m *MockITeamService) IsExist(ctx context.Context, teamId model.Id) (bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "IsExist", ctx, teamId)
 	ret0, _ := ret[0].(bool)

@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	entity "github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	model "github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -36,10 +36,10 @@ func (m *MockIAuthRepository) EXPECT() *MockIAuthRepositoryMockRecorder {
 }
 
 // FindUserIdByFirebaseUserId mocks base method.
-func (m *MockIAuthRepository) FindUserIdByFirebaseUserId(ctx context.Context) (entity.Id, error) {
+func (m *MockIAuthRepository) FindUserIdByFirebaseUserId(ctx context.Context) (model.Id, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "FindUserIdByFirebaseUserId", ctx)
-	ret0, _ := ret[0].(entity.Id)
+	ret0, _ := ret[0].(model.Id)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

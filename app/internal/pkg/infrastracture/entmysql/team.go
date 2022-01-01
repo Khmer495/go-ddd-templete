@@ -3,7 +3,7 @@ package entmysql
 import (
 	"context"
 
-	entity "github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	model "github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/repository"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent"
 	"github.com/Khmer495/go-templete/internal/pkg/util/cerror"
@@ -20,7 +20,7 @@ func NewTeamRepository() repository.ITeamRepository {
 	}
 }
 
-func (tr teamRepository) Create(ctx context.Context, t entity.Team) error {
+func (tr teamRepository) Create(ctx context.Context, t model.Team) error {
 	err := func() error {
 		tx, err := tr.mysqlClient.Tx(ctx)
 		if err != nil {
@@ -46,7 +46,7 @@ func (tr teamRepository) Create(ctx context.Context, t entity.Team) error {
 	return nil
 }
 
-func (tr teamRepository) IsExist(ctx context.Context, teamId entity.Id) (bool, error) {
+func (tr teamRepository) IsExist(ctx context.Context, teamId model.Id) (bool, error) {
 	is, err := isTeamExist(ctx, tr.mysqlClient.Team, teamId)
 	if err != nil {
 		return false, xerrors.Errorf("isTeamExist: %w", err)
@@ -54,43 +54,43 @@ func (tr teamRepository) IsExist(ctx context.Context, teamId entity.Id) (bool, e
 	return is, nil
 }
 
-func (tr teamRepository) One(ctx context.Context, teamId entity.Id) (entity.Team, error) {
+func (tr teamRepository) One(ctx context.Context, teamId model.Id) (model.Team, error) {
 	team, err := findTeam(ctx, tr.mysqlClient.Team, teamId)
 	if err != nil {
-		return entity.NilTeam, xerrors.Errorf("findTeam: %w", err)
+		return model.NilTeam, xerrors.Errorf("findTeam: %w", err)
 	}
-	entityTeam, err := team.EntityTeam()
+	modelTeam, err := entTeamTomodelTeam(team)
 	if err != nil {
-		return entity.NilTeam, xerrors.Errorf("team.EntityTeam: %w", err)
+		return model.NilTeam, xerrors.Errorf("team.modelTeam: %w", err)
 	}
-	return entityTeam, nil
+	return modelTeam, nil
 }
 
-func (tr teamRepository) List(ctx context.Context, limit entity.Limit, page entity.Page) (entity.Teams, error) {
+func (tr teamRepository) List(ctx context.Context, limit model.Limit, page model.Page) (model.Teams, error) {
 	teams, err := getTeams(ctx, tr.mysqlClient.Team, limit, page, getTeamsParam{})
 	if err != nil {
-		return entity.NilTeams, xerrors.Errorf("getTeams: %w", err)
+		return model.NilTeams, xerrors.Errorf("getTeams: %w", err)
 	}
-	entityTeams, err := ent.Teams(teams).EntityTeams()
+	modelTeams, err := entTeamsTomodelTeams(teams)
 	if err != nil {
-		return entity.NilTeams, xerrors.Errorf("teams.NewEntityTeams: %w", err)
+		return model.NilTeams, xerrors.Errorf("teams.NewmodelTeams: %w", err)
 	}
-	return entityTeams, nil
+	return modelTeams, nil
 }
 
-func (tr teamRepository) SearchByNamePrefix(ctx context.Context, limit entity.Limit, page entity.Page, tn entity.TeamName) (entity.Teams, error) {
+func (tr teamRepository) SearchByNamePrefix(ctx context.Context, limit model.Limit, page model.Page, tn model.TeamName) (model.Teams, error) {
 	teams, err := getTeams(ctx, tr.mysqlClient.Team, limit, page, getTeamsParam{pTeamNamePrefix: &tn})
 	if err != nil {
-		return entity.NilTeams, xerrors.Errorf("getTeams: %w", err)
+		return model.NilTeams, xerrors.Errorf("getTeams: %w", err)
 	}
-	entityTeams, err := ent.Teams(teams).EntityTeams()
+	modelTeams, err := entTeamsTomodelTeams(teams)
 	if err != nil {
-		return entity.NilTeams, xerrors.Errorf("teams.NewEntityTeams: %w", err)
+		return model.NilTeams, xerrors.Errorf("teams.NewmodelTeams: %w", err)
 	}
-	return entityTeams, nil
+	return modelTeams, nil
 }
 
-func (tr teamRepository) Change(ctx context.Context, t entity.Team) error {
+func (tr teamRepository) Change(ctx context.Context, t model.Team) error {
 	err := func() error {
 		tx, err := tr.mysqlClient.Tx(ctx)
 		if err != nil {
@@ -112,7 +112,7 @@ func (tr teamRepository) Change(ctx context.Context, t entity.Team) error {
 	return nil
 }
 
-func (tr teamRepository) Delete(ctx context.Context, teamId entity.Id) error {
+func (tr teamRepository) Delete(ctx context.Context, teamId model.Id) error {
 	err := func() error {
 		tx, err := tr.mysqlClient.Tx(ctx)
 		if err != nil {
@@ -122,9 +122,9 @@ func (tr teamRepository) Delete(ctx context.Context, teamId entity.Id) error {
 		if err != nil {
 			return txRollbackAndParseError(tx, err, "findTeamRecord")
 		}
-		deletedAt, err := entity.InitDatetime()
+		deletedAt, err := model.InitDatetime()
 		if err != nil {
-			return txRollbackAndParseError(tx, err, "entity.InitDatetime")
+			return txRollbackAndParseError(tx, err, "model.InitDatetime")
 		}
 		err = deleteTeam(ctx, tx.Team, team.ID, deletedAt)
 		if err != nil {
@@ -138,7 +138,7 @@ func (tr teamRepository) Delete(ctx context.Context, teamId entity.Id) error {
 	return nil
 }
 
-func (tr teamRepository) Join(ctx context.Context, teamId entity.Id, userId entity.Id) error {
+func (tr teamRepository) Join(ctx context.Context, teamId model.Id, userId model.Id) error {
 	err := func() error {
 		tx, err := tr.mysqlClient.Tx(ctx)
 		if err != nil {

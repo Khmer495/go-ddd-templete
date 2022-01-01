@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/repository"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/service"
 	"github.com/Khmer495/go-templete/internal/pkg/util/cerror"
@@ -62,12 +62,12 @@ func Test_userUsecase_Register(t *testing.T) {
 	}
 	type mockVals struct {
 		usSelfIdRessErr    error
-		urRegisterArgsUser entity.User
+		urRegisterArgsUser model.User
 	}
 	tests := []struct {
 		name     string
 		args     args
-		want     entity.User
+		want     model.User
 		wantErr  bool
 		mockVals mockVals
 	}{
@@ -88,7 +88,7 @@ func Test_userUsecase_Register(t *testing.T) {
 			args: args{
 				name: testdata.UserName0String,
 			},
-			want:    entity.NilUser,
+			want:    model.NilUser,
 			wantErr: true,
 			mockVals: mockVals{
 				usSelfIdRessErr: nil,
@@ -99,7 +99,7 @@ func Test_userUsecase_Register(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			ctx := context.Background()
 			us, ur := getMocksForUser(t)
-			us.EXPECT().SelfId(ctx).Return(entity.NilId, tt.mockVals.usSelfIdRessErr).Times(1)
+			us.EXPECT().SelfId(ctx).Return(model.NilId, tt.mockVals.usSelfIdRessErr).Times(1)
 			ur.EXPECT().Register(ctx, tt.mockVals.urRegisterArgsUser).Return(nil).Times(1)
 			uu := NewUserUsecase(us, ur)
 			got, err := uu.Register(ctx, tt.args.name)
@@ -116,11 +116,11 @@ func Test_userUsecase_Register(t *testing.T) {
 
 func Test_userUsecase_GetSelfProfile(t *testing.T) {
 	type mockVals struct {
-		urSelfRessUser entity.User
+		urSelfRessUser model.User
 	}
 	tests := []struct {
 		name     string
-		want     entity.User
+		want     model.User
 		wantErr  bool
 		mockVals mockVals
 	}{
@@ -159,19 +159,19 @@ func Test_userUsecase_GetList(t *testing.T) {
 	}
 	type mockVals struct {
 		urListTimes                   int
-		urListArgsLimit               entity.Limit
-		urListArgsPage                entity.Page
-		urListRessUsers               entity.Users
+		urListArgsLimit               model.Limit
+		urListArgsPage                model.Page
+		urListRessUsers               model.Users
 		urSearchByNamePrefixTimes     int
-		urSearchByNamePrefixArgsLimit entity.Limit
-		urSearchByNamePrefixArgsPage  entity.Page
-		urSearchByNamePrefixArgsName  entity.UserName
-		urSearchByNamePrefixRessUsers entity.Users
+		urSearchByNamePrefixArgsLimit model.Limit
+		urSearchByNamePrefixArgsPage  model.Page
+		urSearchByNamePrefixArgsName  model.UserName
+		urSearchByNamePrefixRessUsers model.Users
 	}
 	tests := []struct {
 		name     string
 		args     args
-		want     entity.Users
+		want     model.Users
 		wantErr  bool
 		mockVals mockVals
 	}{
@@ -235,13 +235,13 @@ func Test_userUsecase_ChangeSelfProfile(t *testing.T) {
 		pName *string
 	}
 	type mockVals struct {
-		urSelfRessUser   entity.User
-		urChangeArgsUser entity.User
+		urSelfRessUser   model.User
+		urChangeArgsUser model.User
 	}
 	tests := []struct {
 		name     string
 		args     args
-		want     entity.User
+		want     model.User
 		wantErr  bool
 		mockVals mockVals
 	}{

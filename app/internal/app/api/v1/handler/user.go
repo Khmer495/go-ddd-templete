@@ -1,17 +1,20 @@
 package handler
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/Khmer495/go-templete/internal/app/api/v1/openapi"
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/usecase"
 	"github.com/Khmer495/go-templete/internal/pkg/util/cerror"
 	"github.com/labstack/echo/v4"
 	"go.uber.org/zap"
-	"golang.org/x/xerrors"
 )
+
+type IUserHandler interface {
+	GetProfile(ctx echo.Context) error
+	PutProfile(ctx echo.Context) error
+	PostUser(ctx echo.Context) error
+}
 
 type userHandler struct {
 	uu usecase.IUserUsecase
@@ -23,33 +26,14 @@ func NewUserHandler(uu usecase.IUserUsecase) IUserHandler {
 	}
 }
 
-func fromEntityUserToOpenapiUser(ctx context.Context, u entity.User) (openapi.User, error) {
-	return openapi.User{
-		Id:   u.Id().Ulid().String(),
-		Name: u.Name().String(),
-	}, nil
-}
-
-func fromEntityUsersToOpenapiUsers(ctx context.Context, us entity.Users) ([]openapi.User, error) {
-	users := []openapi.User{}
-	for _, u := range us {
-		user, err := fromEntityUserToOpenapiUser(ctx, *u)
-		if err != nil {
-			return nil, xerrors.Errorf("fromEntityUserToOpenapiUser: %w", err)
-		}
-		users = append(users, user)
-	}
-	return users, nil
-}
-
 func (uh userHandler) GetLogin(ctx echo.Context) error {
 	user, err := uh.uu.GetSelfProfile(ctx.Request().Context())
 	if err != nil {
 		return NewInternalServerError(ctx)
 	}
-	res, err := fromEntityUserToOpenapiUser(ctx.Request().Context(), user)
+	res, err := frommodelUserToOpenapiUser(ctx.Request().Context(), user)
 	if err != nil {
-		zap.S().Errorf("fromEntityUserToOpenapiUser: %+v", err)
+		zap.S().Errorf("frommodelUserToOpenapiUser: %+v", err)
 		return NewInternalServerError(ctx)
 	}
 	return ctx.JSON(http.StatusOK, res)
@@ -61,9 +45,9 @@ func (uh userHandler) GetProfile(ctx echo.Context) error {
 		zap.S().Errorf("uh.uu.GetSelfProfile: %+v", err)
 		return NewInternalServerError(ctx)
 	}
-	res, err := fromEntityUserToOpenapiUser(ctx.Request().Context(), user)
+	res, err := frommodelUserToOpenapiUser(ctx.Request().Context(), user)
 	if err != nil {
-		zap.S().Errorf("fromEntityUserToOpenapiUser: %+v", err)
+		zap.S().Errorf("frommodelUserToOpenapiUser: %+v", err)
 		return NewInternalServerError(ctx)
 	}
 	return ctx.JSON(http.StatusOK, res)
@@ -83,9 +67,9 @@ func (uh userHandler) PutProfile(ctx echo.Context) error {
 		}
 		return NewInternalServerError(ctx)
 	}
-	res, err := fromEntityUserToOpenapiUser(ctx.Request().Context(), user)
+	res, err := frommodelUserToOpenapiUser(ctx.Request().Context(), user)
 	if err != nil {
-		zap.S().Errorf("fromEntityUserToOpenapiUser: %+v", err)
+		zap.S().Errorf("frommodelUserToOpenapiUser: %+v", err)
 		return NewInternalServerError(ctx)
 	}
 	return ctx.JSON(http.StatusOK, res)
@@ -108,9 +92,9 @@ func (uh userHandler) PostUser(ctx echo.Context) error {
 		}
 		return NewInternalServerError(ctx)
 	}
-	res, err := fromEntityUserToOpenapiUser(ctx.Request().Context(), user)
+	res, err := frommodelUserToOpenapiUser(ctx.Request().Context(), user)
 	if err != nil {
-		zap.S().Errorf("fromEntityUserToOpenapiUser: %+v", err)
+		zap.S().Errorf("frommodelUserToOpenapiUser: %+v", err)
 		return NewInternalServerError(ctx)
 	}
 	return ctx.JSON(http.StatusCreated, res)

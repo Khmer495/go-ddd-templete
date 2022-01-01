@@ -55,13 +55,13 @@ func (uu *UserUpdate) SetName(s string) *UserUpdate {
 	return uu
 }
 
-// AddTeamIDs adds the "teams" edge to the Team entity by IDs.
+// AddTeamIDs adds the "teams" edge to the Team model by IDs.
 func (uu *UserUpdate) AddTeamIDs(ids ...int) *UserUpdate {
 	uu.mutation.AddTeamIDs(ids...)
 	return uu
 }
 
-// AddTeams adds the "teams" edges to the Team entity.
+// AddTeams adds the "teams" edges to the Team model.
 func (uu *UserUpdate) AddTeams(t ...*Team) *UserUpdate {
 	ids := make([]int, len(t))
 	for i := range t {
@@ -70,13 +70,13 @@ func (uu *UserUpdate) AddTeams(t ...*Team) *UserUpdate {
 	return uu.AddTeamIDs(ids...)
 }
 
-// AddTeamUserIDs adds the "team_users" edge to the TeamUser entity by IDs.
+// AddTeamUserIDs adds the "team_users" edge to the TeamUser model by IDs.
 func (uu *UserUpdate) AddTeamUserIDs(ids ...int) *UserUpdate {
 	uu.mutation.AddTeamUserIDs(ids...)
 	return uu
 }
 
-// AddTeamUsers adds the "team_users" edges to the TeamUser entity.
+// AddTeamUsers adds the "team_users" edges to the TeamUser model.
 func (uu *UserUpdate) AddTeamUsers(t ...*TeamUser) *UserUpdate {
 	ids := make([]int, len(t))
 	for i := range t {
@@ -90,7 +90,7 @@ func (uu *UserUpdate) Mutation() *UserMutation {
 	return uu.mutation
 }
 
-// ClearTeams clears all "teams" edges to the Team entity.
+// ClearTeams clears all "teams" edges to the Team model.
 func (uu *UserUpdate) ClearTeams() *UserUpdate {
 	uu.mutation.ClearTeams()
 	return uu
@@ -111,7 +111,7 @@ func (uu *UserUpdate) RemoveTeams(t ...*Team) *UserUpdate {
 	return uu.RemoveTeamIDs(ids...)
 }
 
-// ClearTeamUsers clears all "team_users" edges to the TeamUser entity.
+// ClearTeamUsers clears all "team_users" edges to the TeamUser model.
 func (uu *UserUpdate) ClearTeamUsers() *UserUpdate {
 	uu.mutation.ClearTeamUsers()
 	return uu
@@ -356,7 +356,7 @@ func (uu *UserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	return n, nil
 }
 
-// UserUpdateOne is the builder for updating a single User entity.
+// UserUpdateOne is the builder for updating a single User model.
 type UserUpdateOne struct {
 	config
 	fields   []string
@@ -390,13 +390,13 @@ func (uuo *UserUpdateOne) SetName(s string) *UserUpdateOne {
 	return uuo
 }
 
-// AddTeamIDs adds the "teams" edge to the Team entity by IDs.
+// AddTeamIDs adds the "teams" edge to the Team model by IDs.
 func (uuo *UserUpdateOne) AddTeamIDs(ids ...int) *UserUpdateOne {
 	uuo.mutation.AddTeamIDs(ids...)
 	return uuo
 }
 
-// AddTeams adds the "teams" edges to the Team entity.
+// AddTeams adds the "teams" edges to the Team model.
 func (uuo *UserUpdateOne) AddTeams(t ...*Team) *UserUpdateOne {
 	ids := make([]int, len(t))
 	for i := range t {
@@ -405,13 +405,13 @@ func (uuo *UserUpdateOne) AddTeams(t ...*Team) *UserUpdateOne {
 	return uuo.AddTeamIDs(ids...)
 }
 
-// AddTeamUserIDs adds the "team_users" edge to the TeamUser entity by IDs.
+// AddTeamUserIDs adds the "team_users" edge to the TeamUser model by IDs.
 func (uuo *UserUpdateOne) AddTeamUserIDs(ids ...int) *UserUpdateOne {
 	uuo.mutation.AddTeamUserIDs(ids...)
 	return uuo
 }
 
-// AddTeamUsers adds the "team_users" edges to the TeamUser entity.
+// AddTeamUsers adds the "team_users" edges to the TeamUser model.
 func (uuo *UserUpdateOne) AddTeamUsers(t ...*TeamUser) *UserUpdateOne {
 	ids := make([]int, len(t))
 	for i := range t {
@@ -425,7 +425,7 @@ func (uuo *UserUpdateOne) Mutation() *UserMutation {
 	return uuo.mutation
 }
 
-// ClearTeams clears all "teams" edges to the Team entity.
+// ClearTeams clears all "teams" edges to the Team model.
 func (uuo *UserUpdateOne) ClearTeams() *UserUpdateOne {
 	uuo.mutation.ClearTeams()
 	return uuo
@@ -446,7 +446,7 @@ func (uuo *UserUpdateOne) RemoveTeams(t ...*Team) *UserUpdateOne {
 	return uuo.RemoveTeamIDs(ids...)
 }
 
-// ClearTeamUsers clears all "team_users" edges to the TeamUser entity.
+// ClearTeamUsers clears all "team_users" edges to the TeamUser model.
 func (uuo *UserUpdateOne) ClearTeamUsers() *UserUpdateOne {
 	uuo.mutation.ClearTeamUsers()
 	return uuo
@@ -467,14 +467,14 @@ func (uuo *UserUpdateOne) RemoveTeamUsers(t ...*TeamUser) *UserUpdateOne {
 	return uuo.RemoveTeamUserIDs(ids...)
 }
 
-// Select allows selecting one or more fields (columns) of the returned entity.
-// The default is selecting all fields defined in the entity schema.
+// Select allows selecting one or more fields (columns) of the returned model.
+// The default is selecting all fields defined in the model schema.
 func (uuo *UserUpdateOne) Select(field string, fields ...string) *UserUpdateOne {
 	uuo.fields = append([]string{field}, fields...)
 	return uuo
 }
 
-// Save executes the query and returns the updated User entity.
+// Save executes the query and returns the updated User model.
 func (uuo *UserUpdateOne) Save(ctx context.Context) (*User, error) {
 	var (
 		err  error
@@ -513,7 +513,7 @@ func (uuo *UserUpdateOne) SaveX(ctx context.Context) *User {
 	return node
 }
 
-// Exec executes the query on the entity.
+// Exec executes the query on the model.
 func (uuo *UserUpdateOne) Exec(ctx context.Context) error {
 	_, err := uuo.Save(ctx)
 	return err

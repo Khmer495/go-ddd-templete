@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/repository"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/service"
 	"github.com/Khmer495/go-templete/test/testdata"
@@ -70,13 +70,13 @@ func Test_teamUsecase_Create(t *testing.T) {
 		description string
 	}
 	type mockVals struct {
-		urSelfRessUser   entity.User
-		trCreateArgsTeam entity.Team
+		urSelfRessUser   model.User
+		trCreateArgsTeam model.Team
 	}
 	tests := []struct {
 		name     string
 		args     args
-		want     entity.Team
+		want     model.Team
 		wantErr  bool
 		mockVals mockVals
 	}{
@@ -121,19 +121,19 @@ func Test_teamUsecase_GetList(t *testing.T) {
 	}
 	type mockVals struct {
 		trListTimes                   int
-		trListArgsLimit               entity.Limit
-		trListArgsPage                entity.Page
-		trListRessTeams               entity.Teams
+		trListArgsLimit               model.Limit
+		trListArgsPage                model.Page
+		trListRessTeams               model.Teams
 		trSearchByNamePrefixTimes     int
-		trSearchByNamePrefixArgsLimit entity.Limit
-		trSearchByNamePrefixArgsPage  entity.Page
-		trSearchByNamePrefixArgsName  entity.TeamName
-		trSearchByNamePrefixRessTeams entity.Teams
+		trSearchByNamePrefixArgsLimit model.Limit
+		trSearchByNamePrefixArgsPage  model.Page
+		trSearchByNamePrefixArgsName  model.TeamName
+		trSearchByNamePrefixRessTeams model.Teams
 	}
 	tests := []struct {
 		name     string
 		args     args
-		want     entity.Teams
+		want     model.Teams
 		wantErr  bool
 		mockVals mockVals
 	}{
@@ -199,17 +199,17 @@ func Test_teamUsecase_Change(t *testing.T) {
 		pDescription *string
 	}
 	type mockVals struct {
-		trOneArgsTeamId     entity.Id
-		trOneRessTeam       entity.Team
-		urSelectArgsUserIds entity.Ids
-		urSelectRessUsers   entity.Users
-		urSelfRessUser      entity.User
-		trChangeArgsTeam    entity.Team
+		trOneArgsTeamId     model.Id
+		trOneRessTeam       model.Team
+		urSelectArgsUserIds model.Ids
+		urSelectRessUsers   model.Users
+		urSelfRessUser      model.User
+		trChangeArgsTeam    model.Team
 	}
 	tests := []struct {
 		name     string
 		args     args
-		want     entity.Team
+		want     model.Team
 		wantErr  bool
 		mockVals mockVals
 	}{
@@ -236,7 +236,7 @@ func Test_teamUsecase_Change(t *testing.T) {
 		ctx := context.Background()
 		ts, us, tr, ur := getMocksForTeam(t)
 		tr.EXPECT().One(ctx, tt.mockVals.trOneArgsTeamId).Return(tt.mockVals.trOneRessTeam, nil).Times(1)
-		ur.EXPECT().Select(ctx, entity.NilLimit, entity.NilPage, tt.mockVals.urSelectArgsUserIds).Return(tt.mockVals.urSelectRessUsers, nil).Times(1)
+		ur.EXPECT().Select(ctx, model.NilLimit, model.NilPage, tt.mockVals.urSelectArgsUserIds).Return(tt.mockVals.urSelectRessUsers, nil).Times(1)
 		ur.EXPECT().Self(ctx).Return(tt.mockVals.urSelfRessUser, nil).Times(1)
 		tr.EXPECT().Change(ctx, tt.mockVals.trChangeArgsTeam).Return(nil).Times(1)
 		tu := NewTeamUsecase(ts, us, tr, ur)
@@ -258,9 +258,9 @@ func Test_teamUsecase_Delete(t *testing.T) {
 		teamIdString string
 	}
 	type mockVals struct {
-		trOneArgsTeamId    entity.Id
-		trOneRessTeam      entity.Team
-		trDeleteArgsTeamId entity.Id
+		trOneArgsTeamId    model.Id
+		trOneRessTeam      model.Team
+		trDeleteArgsTeamId model.Id
 	}
 	tests := []struct {
 		name     string
@@ -300,11 +300,11 @@ func Test_teamUsecase_Join(t *testing.T) {
 		teamIdString string
 	}
 	type mockVals struct {
-		trOneArgsTeamId    entity.Id
-		trOneRessTeam      entity.Team
-		usSelfIdRessUserId entity.Id
-		trJoinArgsTeamId   entity.Id
-		trJoinArgsUserId   entity.Id
+		trOneArgsTeamId    model.Id
+		trOneRessTeam      model.Team
+		usSelfIdRessUserId model.Id
+		trJoinArgsTeamId   model.Id
+		trJoinArgsUserId   model.Id
 	}
 	tests := []struct {
 		name     string

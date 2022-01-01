@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/team"
 	"github.com/Khmer495/go-templete/internal/pkg/util/cerror"
@@ -13,7 +13,7 @@ import (
 	"golang.org/x/xerrors"
 )
 
-func createTeam(ctx context.Context, tc *ent.TeamClient, t entity.Team, createUserPk int) (ent.Team, error) {
+func createTeam(ctx context.Context, tc *ent.TeamClient, t model.Team, createUserPk int) (ent.Team, error) {
 	team, err := tc.Create().
 		SetUlid(t.Id().Ulid().String()).
 		SetCreatedAt(t.CreatedAt().Time()).
@@ -35,7 +35,7 @@ func createTeam(ctx context.Context, tc *ent.TeamClient, t entity.Team, createUs
 	return *team, nil
 }
 
-func isTeamExist(ctx context.Context, tc *ent.TeamClient, teamId entity.Id) (bool, error) {
+func isTeamExist(ctx context.Context, tc *ent.TeamClient, teamId model.Id) (bool, error) {
 	tq := tc.Query()
 	teamQueryFind(tq, teamId)
 	teamQueryActive(tq)
@@ -46,7 +46,7 @@ func isTeamExist(ctx context.Context, tc *ent.TeamClient, teamId entity.Id) (boo
 	return ok, nil
 }
 
-func findTeamRecord(ctx context.Context, tc *ent.TeamClient, teamId entity.Id) (ent.Team, error) {
+func findTeamRecord(ctx context.Context, tc *ent.TeamClient, teamId model.Id) (ent.Team, error) {
 	tq := tc.Query()
 	teamQuerySelect(tq)
 	teamQueryFind(tq, teamId)
@@ -58,7 +58,7 @@ func findTeamRecord(ctx context.Context, tc *ent.TeamClient, teamId entity.Id) (
 	return *team, nil
 }
 
-func findTeam(ctx context.Context, tc *ent.TeamClient, teamId entity.Id) (ent.Team, error) {
+func findTeam(ctx context.Context, tc *ent.TeamClient, teamId model.Id) (ent.Team, error) {
 	tq := tc.Query()
 	teamQuerySelect(tq)
 	teamQueryFind(tq, teamId)
@@ -72,10 +72,10 @@ func findTeam(ctx context.Context, tc *ent.TeamClient, teamId entity.Id) (ent.Te
 }
 
 type getTeamsParam struct {
-	pTeamNamePrefix *entity.TeamName
+	pTeamNamePrefix *model.TeamName
 }
 
-func getTeams(ctx context.Context, tc *ent.TeamClient, limit entity.Limit, page entity.Page, gtp getTeamsParam) (ent.Teams, error) {
+func getTeams(ctx context.Context, tc *ent.TeamClient, limit model.Limit, page model.Page, gtp getTeamsParam) (ent.Teams, error) {
 	tq := tc.Query()
 	teamQuerySelect(tq)
 	teamQueryActive(tq)
@@ -94,7 +94,7 @@ func getTeams(ctx context.Context, tc *ent.TeamClient, limit entity.Limit, page 
 	return teams, nil
 }
 
-func updateTeam(ctx context.Context, tc *ent.TeamClient, teamPk int, t entity.Team) (ent.Team, error) {
+func updateTeam(ctx context.Context, tc *ent.TeamClient, teamPk int, t model.Team) (ent.Team, error) {
 	team, err := tc.UpdateOneID(teamPk).
 		SetName(t.Name().String()).
 		SetDescription(t.Description().String()).
@@ -105,7 +105,7 @@ func updateTeam(ctx context.Context, tc *ent.TeamClient, teamPk int, t entity.Te
 	return *team, nil
 }
 
-func deleteTeam(ctx context.Context, tc *ent.TeamClient, teamPk int, deletedAt entity.Datetime) error {
+func deleteTeam(ctx context.Context, tc *ent.TeamClient, teamPk int, deletedAt model.Datetime) error {
 	_, err := tc.UpdateOneID(teamPk).
 		SetDeletedAt(deletedAt.Time()).
 		Save(ctx)

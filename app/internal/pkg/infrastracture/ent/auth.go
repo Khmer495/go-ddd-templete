@@ -11,7 +11,7 @@ import (
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/user"
 )
 
-// Auth is the model entity for the Auth schema.
+// Auth is the model model for the Auth schema.
 type Auth struct {
 	config `json:"-"`
 	// ID of the ent.
@@ -95,7 +95,7 @@ func (a *Auth) assignValues(columns []string, values []interface{}) error {
 	return nil
 }
 
-// QueryUser queries the "user" edge of the Auth entity.
+// QueryUser queries the "user" edge of the Auth model.
 func (a *Auth) QueryUser() *UserQuery {
 	return (&AuthClient{config: a.config}).QueryUser(a)
 }
@@ -107,12 +107,12 @@ func (a *Auth) Update() *AuthUpdateOne {
 	return (&AuthClient{config: a.config}).UpdateOne(a)
 }
 
-// Unwrap unwraps the Auth entity that was returned from a transaction after it was closed,
+// Unwrap unwraps the Auth model that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
 func (a *Auth) Unwrap() *Auth {
 	tx, ok := a.config.driver.(*txDriver)
 	if !ok {
-		panic("ent: Auth is not a transactional entity")
+		panic("ent: Auth is not a transactional model")
 	}
 	a.config.driver = tx.drv
 	return a

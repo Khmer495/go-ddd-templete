@@ -13,7 +13,7 @@ import (
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/team"
 )
 
-// TeamDelete is the builder for deleting a Team entity.
+// TeamDelete is the builder for deleting a Team model.
 type TeamDelete struct {
 	config
 	hooks    []Hook
@@ -84,7 +84,7 @@ func (td *TeamDelete) sqlExec(ctx context.Context) (int, error) {
 	return sqlgraph.DeleteNodes(ctx, td.driver, _spec)
 }
 
-// TeamDeleteOne is the builder for deleting a single Team entity.
+// TeamDeleteOne is the builder for deleting a single Team model.
 type TeamDeleteOne struct {
 	td *TeamDelete
 }

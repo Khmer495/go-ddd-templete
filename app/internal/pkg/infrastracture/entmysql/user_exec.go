@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/user"
 	"github.com/Khmer495/go-templete/internal/pkg/util/cerror"
@@ -13,7 +13,7 @@ import (
 	"golang.org/x/xerrors"
 )
 
-func createUser(ctx context.Context, uc *ent.UserClient, u entity.User) (ent.User, error) {
+func createUser(ctx context.Context, uc *ent.UserClient, u model.User) (ent.User, error) {
 	user, err := uc.Create().
 		SetUlid(u.Id().Ulid().String()).
 		SetCreatedAt(u.CreatedAt().Time()).
@@ -33,7 +33,7 @@ func createUser(ctx context.Context, uc *ent.UserClient, u entity.User) (ent.Use
 	return *user, nil
 }
 
-func isUserExist(ctx context.Context, uc *ent.UserClient, userId entity.Id) (bool, error) {
+func isUserExist(ctx context.Context, uc *ent.UserClient, userId model.Id) (bool, error) {
 	uq := uc.Query()
 	userQueryFind(uq, userId)
 	userQueryActive(uq)
@@ -44,7 +44,7 @@ func isUserExist(ctx context.Context, uc *ent.UserClient, userId entity.Id) (boo
 	return ok, nil
 }
 
-func findUserRecord(ctx context.Context, uc *ent.UserClient, userId entity.Id) (ent.User, error) {
+func findUserRecord(ctx context.Context, uc *ent.UserClient, userId model.Id) (ent.User, error) {
 	uq := uc.Query()
 	userQuerySelect(uq)
 	userQueryFind(uq, userId)
@@ -56,16 +56,16 @@ func findUserRecord(ctx context.Context, uc *ent.UserClient, userId entity.Id) (
 	return *user, nil
 }
 
-func findUser(ctx context.Context, uc *ent.UserClient, userId entity.Id) (ent.User, error) {
+func findUser(ctx context.Context, uc *ent.UserClient, userId model.Id) (ent.User, error) {
 	return findUserRecord(ctx, uc, userId)
 }
 
 type getUsersParam struct {
-	pUserIds        *entity.Ids
-	pUserNamePrefix *entity.UserName
+	pUserIds        *model.Ids
+	pUserNamePrefix *model.UserName
 }
 
-func getUsers(ctx context.Context, uc *ent.UserClient, limit entity.Limit, page entity.Page, gup getUsersParam) (ent.Users, error) {
+func getUsers(ctx context.Context, uc *ent.UserClient, limit model.Limit, page model.Page, gup getUsersParam) (ent.Users, error) {
 	uq := uc.Query()
 	userQuerySelect(uq)
 	userQueryActive(uq)
@@ -84,7 +84,7 @@ func getUsers(ctx context.Context, uc *ent.UserClient, limit entity.Limit, page 
 	return users, nil
 }
 
-func updateUser(ctx context.Context, uc *ent.UserClient, userPk int, u entity.User) (ent.User, error) {
+func updateUser(ctx context.Context, uc *ent.UserClient, userPk int, u model.User) (ent.User, error) {
 	user, err := uc.UpdateOneID(userPk).
 		SetName(u.Name().String()).
 		Save(ctx)

@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	entity "github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	model "github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -36,7 +36,7 @@ func (m *MockITeamRepository) EXPECT() *MockITeamRepositoryMockRecorder {
 }
 
 // Change mocks base method.
-func (m *MockITeamRepository) Change(ctx context.Context, t entity.Team) error {
+func (m *MockITeamRepository) Change(ctx context.Context, t model.Team) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Change", ctx, t)
 	ret0, _ := ret[0].(error)
@@ -50,7 +50,7 @@ func (mr *MockITeamRepositoryMockRecorder) Change(ctx, t interface{}) *gomock.Ca
 }
 
 // Create mocks base method.
-func (m *MockITeamRepository) Create(ctx context.Context, t entity.Team) error {
+func (m *MockITeamRepository) Create(ctx context.Context, t model.Team) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, t)
 	ret0, _ := ret[0].(error)
@@ -64,7 +64,7 @@ func (mr *MockITeamRepositoryMockRecorder) Create(ctx, t interface{}) *gomock.Ca
 }
 
 // Delete mocks base method.
-func (m *MockITeamRepository) Delete(ctx context.Context, teamId entity.Id) error {
+func (m *MockITeamRepository) Delete(ctx context.Context, teamId model.Id) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, teamId)
 	ret0, _ := ret[0].(error)
@@ -78,7 +78,7 @@ func (mr *MockITeamRepositoryMockRecorder) Delete(ctx, teamId interface{}) *gomo
 }
 
 // IsExist mocks base method.
-func (m *MockITeamRepository) IsExist(ctx context.Context, teamId entity.Id) (bool, error) {
+func (m *MockITeamRepository) IsExist(ctx context.Context, teamId model.Id) (bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "IsExist", ctx, teamId)
 	ret0, _ := ret[0].(bool)
@@ -93,7 +93,7 @@ func (mr *MockITeamRepositoryMockRecorder) IsExist(ctx, teamId interface{}) *gom
 }
 
 // Join mocks base method.
-func (m *MockITeamRepository) Join(ctx context.Context, teamId, userId entity.Id) error {
+func (m *MockITeamRepository) Join(ctx context.Context, teamId, userId model.Id) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Join", ctx, teamId, userId)
 	ret0, _ := ret[0].(error)
@@ -107,10 +107,10 @@ func (mr *MockITeamRepositoryMockRecorder) Join(ctx, teamId, userId interface{})
 }
 
 // List mocks base method.
-func (m *MockITeamRepository) List(ctx context.Context, limit entity.Limit, page entity.Page) (entity.Teams, error) {
+func (m *MockITeamRepository) List(ctx context.Context, limit model.Limit, page model.Page) (model.Teams, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", ctx, limit, page)
-	ret0, _ := ret[0].(entity.Teams)
+	ret0, _ := ret[0].(model.Teams)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -122,10 +122,10 @@ func (mr *MockITeamRepositoryMockRecorder) List(ctx, limit, page interface{}) *g
 }
 
 // One mocks base method.
-func (m *MockITeamRepository) One(ctx context.Context, teamId entity.Id) (entity.Team, error) {
+func (m *MockITeamRepository) One(ctx context.Context, teamId model.Id) (model.Team, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "One", ctx, teamId)
-	ret0, _ := ret[0].(entity.Team)
+	ret0, _ := ret[0].(model.Team)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -137,10 +137,10 @@ func (mr *MockITeamRepositoryMockRecorder) One(ctx, teamId interface{}) *gomock.
 }
 
 // SearchByNamePrefix mocks base method.
-func (m *MockITeamRepository) SearchByNamePrefix(ctx context.Context, limit entity.Limit, page entity.Page, un entity.TeamName) (entity.Teams, error) {
+func (m *MockITeamRepository) SearchByNamePrefix(ctx context.Context, limit model.Limit, page model.Page, un model.TeamName) (model.Teams, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchByNamePrefix", ctx, limit, page, un)
-	ret0, _ := ret[0].(entity.Teams)
+	ret0, _ := ret[0].(model.Teams)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

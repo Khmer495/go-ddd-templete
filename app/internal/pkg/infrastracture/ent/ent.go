@@ -174,7 +174,7 @@ func IsValidationError(err error) bool {
 	return errors.As(err, &e)
 }
 
-// NotFoundError returns when trying to fetch a specific entity and it was not found in the database.
+// NotFoundError returns when trying to fetch a specific model and it was not found in the database.
 type NotFoundError struct {
 	label string
 }
@@ -201,7 +201,7 @@ func MaskNotFound(err error) error {
 	return err
 }
 
-// NotSingularError returns when trying to fetch a singular entity and more then one was found in the database.
+// NotSingularError returns when trying to fetch a singular model and more then one was found in the database.
 type NotSingularError struct {
 	label string
 }

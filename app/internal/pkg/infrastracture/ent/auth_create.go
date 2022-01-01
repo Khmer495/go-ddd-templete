@@ -13,7 +13,7 @@ import (
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/user"
 )
 
-// AuthCreate is the builder for creating a Auth entity.
+// AuthCreate is the builder for creating a Auth model.
 type AuthCreate struct {
 	config
 	mutation *AuthMutation
@@ -32,7 +32,7 @@ func (ac *AuthCreate) SetFirebaseUserID(s string) *AuthCreate {
 	return ac
 }
 
-// SetUser sets the "user" edge to the User entity.
+// SetUser sets the "user" edge to the User model.
 func (ac *AuthCreate) SetUser(u *User) *AuthCreate {
 	return ac.SetUserID(u.ID)
 }

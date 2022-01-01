@@ -3,7 +3,7 @@ package entmysql
 import (
 	"context"
 
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/repository"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent"
 	"github.com/Khmer495/go-templete/internal/pkg/infrastracture/ent/auth"
@@ -40,10 +40,10 @@ func (ar authRepository) FindUserPkByFirebaseUserId(ctx context.Context) (int, e
 	return auth.UserID, nil
 }
 
-func (ar authRepository) FindUserIdByFirebaseUserId(ctx context.Context) (entity.Id, error) {
+func (ar authRepository) FindUserIdByFirebaseUserId(ctx context.Context) (model.Id, error) {
 	firebaseUserId, err := ccontext.GetFirebaseUserId(ctx)
 	if err != nil {
-		return entity.NilId, xerrors.Errorf("ccontext.GetFirebaseUserId: %w", err)
+		return model.NilId, xerrors.Errorf("ccontext.GetFirebaseUserId: %w", err)
 	}
 	auth, err := ar.mysqlClient.Auth.Query().
 		Where(auth.FirebaseUserIDEQ(firebaseUserId)).
@@ -54,13 +54,13 @@ func (ar authRepository) FindUserIdByFirebaseUserId(ctx context.Context) (entity
 	if err != nil {
 		entNotFountError := &ent.NotFoundError{}
 		if xerrors.As(err, &entNotFountError) {
-			return entity.NilId, cerror.Wrap(err, cerror.ErrorLevel, cerror.NotFoundErrorCode, "ar.mysqlClient.Auth.Query", "存在しないユーザーです。")
+			return model.NilId, cerror.Wrap(err, cerror.ErrorLevel, cerror.NotFoundErrorCode, "ar.mysqlClient.Auth.Query", "存在しないユーザーです。")
 		}
-		return entity.NilId, cerror.Wrap(err, cerror.ErrorLevel, cerror.InterServerErrorCode, "ar.mysqlClient.Auth.Query", cerror.InterServerErrorCode.ToString())
+		return model.NilId, cerror.Wrap(err, cerror.ErrorLevel, cerror.InterServerErrorCode, "ar.mysqlClient.Auth.Query", cerror.InterServerErrorCode.ToString())
 	}
-	userId, err := entity.NewId(auth.Edges.User.Ulid)
+	userId, err := model.NewId(auth.Edges.User.Ulid)
 	if err != nil {
-		return entity.NilId, xerrors.Errorf("entity.NewId: %w", err)
+		return model.NilId, xerrors.Errorf("model.NewId: %w", err)
 	}
 	return userId, nil
 }

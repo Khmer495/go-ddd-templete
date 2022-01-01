@@ -110,7 +110,7 @@ func (tq *TeamQuery) QueryTeamUsers() *TeamUserQuery {
 	return query
 }
 
-// First returns the first Team entity from the query.
+// First returns the first Team model from the query.
 // Returns a *NotFoundError when no Team was found.
 func (tq *TeamQuery) First(ctx context.Context) (*Team, error) {
 	nodes, err := tq.Limit(1).All(ctx)
@@ -155,8 +155,8 @@ func (tq *TeamQuery) FirstIDX(ctx context.Context) int {
 	return id
 }
 
-// Only returns a single Team entity found by the query, ensuring it only returns one.
-// Returns a *NotSingularError when exactly one Team entity is not found.
+// Only returns a single Team model found by the query, ensuring it only returns one.
+// Returns a *NotSingularError when exactly one Team model is not found.
 // Returns a *NotFoundError when no Team entities are found.
 func (tq *TeamQuery) Only(ctx context.Context) (*Team, error) {
 	nodes, err := tq.Limit(2).All(ctx)
@@ -349,7 +349,7 @@ func (tq *TeamQuery) GroupBy(field string, fields ...string) *TeamGroupBy {
 }
 
 // Select allows the selection one or more fields/columns for the given query,
-// instead of selecting all fields in the entity.
+// instead of selecting all fields in the model.
 //
 // Example:
 //

@@ -4,13 +4,13 @@ package service
 import (
 	"context"
 
-	"github.com/Khmer495/go-templete/internal/pkg/domain/entity"
+	"github.com/Khmer495/go-templete/internal/pkg/domain/model"
 	"github.com/Khmer495/go-templete/internal/pkg/domain/repository"
 	"golang.org/x/xerrors"
 )
 
 type ITeamService interface {
-	IsExist(ctx context.Context, teamId entity.Id) (bool, error)
+	IsExist(ctx context.Context, teamId model.Id) (bool, error)
 }
 
 type teamService struct {
@@ -23,7 +23,7 @@ func NewTeamService(tr repository.ITeamRepository) ITeamService {
 	}
 }
 
-func (ts teamService) IsExist(ctx context.Context, teamId entity.Id) (bool, error) {
+func (ts teamService) IsExist(ctx context.Context, teamId model.Id) (bool, error) {
 	isExist, err := ts.tr.IsExist(ctx, teamId)
 	if err != nil {
 		return false, xerrors.Errorf("os.or.IsExist: %w", err)

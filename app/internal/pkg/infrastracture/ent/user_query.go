@@ -110,7 +110,7 @@ func (uq *UserQuery) QueryTeamUsers() *TeamUserQuery {
 	return query
 }
 
-// First returns the first User entity from the query.
+// First returns the first User model from the query.
 // Returns a *NotFoundError when no User was found.
 func (uq *UserQuery) First(ctx context.Context) (*User, error) {
 	nodes, err := uq.Limit(1).All(ctx)
@@ -155,8 +155,8 @@ func (uq *UserQuery) FirstIDX(ctx context.Context) int {
 	return id
 }
 
-// Only returns a single User entity found by the query, ensuring it only returns one.
-// Returns a *NotSingularError when exactly one User entity is not found.
+// Only returns a single User model found by the query, ensuring it only returns one.
+// Returns a *NotSingularError when exactly one User model is not found.
 // Returns a *NotFoundError when no User entities are found.
 func (uq *UserQuery) Only(ctx context.Context) (*User, error) {
 	nodes, err := uq.Limit(2).All(ctx)
@@ -349,7 +349,7 @@ func (uq *UserQuery) GroupBy(field string, fields ...string) *UserGroupBy {
 }
 
 // Select allows the selection one or more fields/columns for the given query,
-// instead of selecting all fields in the entity.
+// instead of selecting all fields in the model.
 //
 // Example:
 //
